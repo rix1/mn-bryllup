@@ -1,0 +1,21 @@
+{
+  "name": "mn-bryllup",
+  "version": "0.0.1",
+  "authors": [
+    "rix1 <rikardeide@gmail.com>"
+  ],
+  "directory": "public/bower_components",
+  "description": "bryllupsside",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}

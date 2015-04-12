@@ -1,0 +1,24 @@
+{
+  "name": "MN-Bryllup",
+  "version": "0.0.1",
+  "description": "Martine og nikkos nettside",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:rix1/mn-bryllup.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rix1/mn-bryllup/issues"
+  },
+  "homepage": "https://github.com/rix1/mn-bryllup",
+  "dependencies": {
+    "express": "^4.12.3",
+    "less": "^2.5.0",
+    "socket.io": "^1.3.5"
+  }
+}
