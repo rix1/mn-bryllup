@@ -197,7 +197,7 @@ Icon
 
 
 ### Bower ###
-bower_components
+public/bower_components
 .bower-cache
 .bower-registry
 .bower-tmp

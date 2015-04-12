@@ -4,7 +4,6 @@
   "authors": [
     "rix1 <rikardeide@gmail.com>"
   ],
-  "directory": "public/bower_components",
   "description": "bryllupsside",
   "license": "MIT",
   "private": true,
@@ -16,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "fontawesome": "~4.3.0"
   }
 }
