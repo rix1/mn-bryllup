@@ -8,14 +8,16 @@ body {
 }
 @font-face {
   font-family: 'Jacques';
-  /*a name to be used later*/
   src: url('/fonts/JacquesGilles.otf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 @font-face {
   font-family: 'Dilem';
-  /*a name to be used later*/
   src: url('/fonts/Dilem.ttf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 #monogram {
@@ -89,6 +91,10 @@ hr.heart-primary:after {
 }
 hr.heart-light {
   border-color: #f2f2f2;
+}
+.btn-primary {
+  background-color: #844352;
+  border: none;
 }
 hr.heart-light:after {
   color: #f2f2f2;
