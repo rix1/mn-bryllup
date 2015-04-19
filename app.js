@@ -15,8 +15,7 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.get('/', function(req, res){
-  //res.sendFile(__dirname + '/index.html');
-  res.send("<h1>HelloWOLd</h1>");
+  res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
