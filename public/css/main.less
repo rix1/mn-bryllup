@@ -6,6 +6,8 @@ body {
     font-family: "lato",sans-serif;
     font-style: normal;
     font-weight: 400;
+    background-color: @greyMd;
+    color: @greyBlack;
 }
 
 @font-face {
@@ -18,9 +20,19 @@ body {
     src: url('/fonts/Dilem.ttf'); /*URL to font*/
 }
 
+#monogram{
+  max-width: 350px;
+}
+
+.fade{
+  width: 100%;
+  height: 100%;
+  background-color: #000066;
+}
+
 p {
-    font-family: 'Dilem';
-    font-size: 20px;
+    font-family: 'Lato';
+    font-size: 15px;
 }
 
 .uppercase{
@@ -37,18 +49,35 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    color: #18bc9c;
+    color: @Red;
 }
 
 h1,
 h2,
-h3,
-h4,
 h5,
 h6 {
     text-transform: uppercase;
     font-family: 'Dilem';
     font-weight: 700;
+}
+
+h3 {
+  font-family: 'Jacques';
+  font-weight: 600;
+  font-size: 2em;
+}
+
+h4 {
+  padding-top: 5px;
+  padding-bottom: 3px;
+  text-transform: uppercase;
+  font-family: 'Dilem';
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.saturday{
+  column-count: 2;
 }
 
 hr.heart-light,
@@ -57,7 +86,7 @@ hr.heart-primary {
     padding: 0;
     max-width: 250px;
     border: 0;
-    border-top: solid 5px;
+    border-top: solid 2px;
     text-align: center;
 }
 
@@ -73,21 +102,22 @@ hr.heart-primary:after {
 }
 
 hr.heart-light {
-    border-color: #fff;
+    border-color: @greyMd;
 }
 
 hr.heart-light:after {
-    color: #fff;
-    background-color: #18bc9c;
+    color: @greyMd;
+    background-color: @Darkblue;
 }
 
 hr.heart-primary {
-    border-color: #2c3e50;
+    border-color: @Red;
 }
 
 hr.heart-primary:after {
-    color: #2c3e50;
-    background-color: #fff;
+    color: @Red;
+    background-color: @greyMd;
+
 }
 
 .img-centered {
@@ -96,13 +126,13 @@ hr.heart-primary:after {
 
 header {
     text-align: center;
-    color: #fff;
-    background: #18bc9c;
+    color: @greyMd;
+    background: @Darkblue;
 }
 
 header .container {
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 150px;
+    padding-bottom: 100px;
 }
 
 header img {
@@ -114,8 +144,7 @@ header .intro-text .name {
     display: block;
     text-transform: uppercase;
     font-family: "Dilem";
-    font-size: 2em;
-    font-weight: 700;
+    font-size: 1.5em;
 }
 
 header .intro-text .skills {
@@ -125,7 +154,7 @@ header .intro-text .skills {
 
 @media(min-width:768px) {
     header .container {
-        padding-top: 200px;
+        padding-top: 170px;
         padding-bottom: 100px;
     }
 
@@ -166,6 +195,8 @@ header .intro-text .skills {
     text-transform: uppercase;
     font-family: "Dilem";
     font-size: 1.5em;
+    background-color: @greyMd;
+
 }
 
 .navbar a:focus {
@@ -195,8 +226,8 @@ section h2 {
 }
 
 section.success {
-    color: #fff;
-    background: #18bc9c;
+    color: @greyMd;
+    background: @Darkblue;
 }
 
 section.success a,
@@ -205,7 +236,7 @@ section.success a:focus,
 section.success a:active,
 section.success a.active {
     outline: 0;
-    color: #2c3e50;
+    color: @Darkblue;
 }
 
 @media(max-width:767px) {
@@ -235,7 +266,7 @@ section.success a.active {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background: rgba(24,188,156,.9);
+    background: @greyMd;
     -webkit-transition: all ease .5s;
     -moz-transition: all ease .5s;
     transition: all ease .5s;
@@ -253,7 +284,7 @@ section.success a.active {
     margin-top: -12px;
     text-align: center;
     font-size: 20px;
-    color: #fff;
+    color: @greyMd;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption .caption-content i {
@@ -277,27 +308,53 @@ section.success a.active {
 
 .btn-outline {
     margin-top: 15px;
-    border: solid 2px #fff;
-    font-size: 20px;
-    color: #fff;
+    border: solid 2px @Red;
+    border-radius: 0;
+    font-size: 30px;
+    font-family: 'Dilem';
+    text-transform: uppercase;
+    color: @greyMd;
+    background: @Red;
+    transition: all .3s ease-in-out;
+}
+
+.btn-red{
+    margin-top: 15px;
+    border: solid 2px @Red;
+    border-radius: 0;
+    font-size: 30px;
+    font-family: 'Dilem';
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: @Red;
     background: 0 0;
     transition: all .3s ease-in-out;
+
+}
+
+.btn-red-outline:hover,
+.btn-red-outline:focus,
+.btn-red-outline:active,
+.btn-red-outline.active{
+  border: solid 2px @Red;
+  color: @greyMd;
+  background: @Red;
 }
 
 .btn-outline:hover,
 .btn-outline:focus,
 .btn-outline:active,
 .btn-outline.active {
-    border: solid 2px #fff;
-    color: #18bc9c;
-    background: #fff;
+    border: solid 2px @greyMd;
+    color: @Darkblue;
+    background: @greyMd;
 }
 
 .floating-label-form-group {
     position: relative;
     margin-bottom: 0;
     padding-bottom: .5em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid @greyMd;
 }
 
 .floating-label-form-group input,
@@ -310,6 +367,7 @@ section.success a.active {
     border-radius: 0;
     font-size: 1.5em;
     background: 0 0;
+    border-bottom: solid 2px @Red;
     box-shadow: none!important;
     resize: none;
 }
@@ -333,7 +391,7 @@ section.success a.active {
 
 .floating-label-form-group::not(:first-child) {
     padding-left: 14px;
-    border-left: 1px solid #eee;
+    border-left: 1px solid @greyMd;
 }
 
 .floating-label-form-group-with-value label {
@@ -342,15 +400,15 @@ section.success a.active {
 }
 
 .floating-label-form-group-with-focus label {
-    color: #18bc9c;
+    color: @Red;
 }
 
 form .row:first-child .floating-label-form-group {
-    border-top: 1px solid #eee;
+    border-top: 1px solid @greyMd;
 }
 
 footer {
-    color: #fff;
+    color: @greyMd;
 }
 
 footer h3 {
@@ -358,24 +416,24 @@ footer h3 {
 }
 
 footer .footer-above {
-    padding-top: 50px;
-    background-color: #2c3e50;
+    padding-top: 20px;
+    background-color: @Darkblue;
 }
 
 footer .footer-col {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 footer .footer-below {
-    padding: 25px 0;
-    background-color: #233140;
+    padding: 15px 0;
+    background-color: @Darkblue;
 }
 
 .btn-social {
     display: inline-block;
     width: 50px;
     height: 50px;
-    border: 2px solid #fff;
+    border: 2px solid @greyMd;
     border-radius: 100%;
     text-align: center;
     font-size: 20px;
@@ -452,7 +510,7 @@ footer .footer-below {
     width: 1px;
     height: 75px;
     margin-left: 35px;
-    background-color: #2c3e50;
+    background-color: @greyMd;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -462,7 +520,7 @@ footer .footer-below {
     z-index: 1052;
     width: 1px;
     height: 75px;
-    background-color: #2c3e50;
+    background-color: @greyMd;
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
