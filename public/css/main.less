@@ -115,8 +115,13 @@ hr.heart-light {
 }
 
 .btn-primary{
-    background-color: @red;
+    color: @red;
+    background-color: transparent;
     border: none;
+}
+
+.btn-primary:hover{
+        background-color: transparent;
 }
 
 .test{
@@ -158,12 +163,13 @@ hr.heart-primary:after {
 
 .img-centered {
     margin: 0 auto;
+
 }
 
 header {
     text-align: center;
     color: @greyMd;
-    background: @darkblue;
+    background-color: @darkblue;
 }
 
 header .container {
@@ -180,7 +186,7 @@ header .intro-text .name {
     display: block;
     text-transform: uppercase;
     font-family: "Dilem";
-    font-size: 1.5em;
+    font-size: 9vw;
 }
 
 header .intro-text .skills {
@@ -188,6 +194,7 @@ header .intro-text .skills {
     font-weight: 300;
 }
 
+// On large screen sizes
 @media(min-width:768px) {
     header .container {
         padding-top: 170px;
@@ -201,9 +208,7 @@ header .intro-text .skills {
     header .intro-text .skills {
         font-size: 1.75em;
     }
-}
 
-@media(min-width:768px) {
     .navbar-fixed-top {
         padding: 25px 0;
         -webkit-transition: padding .3s;
@@ -222,9 +227,10 @@ header .intro-text .skills {
         padding: 10px 0;
     }
 
-    .navbar-fixed-top.navbar-shrink .navbar-brand {
-        font-size: 1.5em;
-    }
+}
+
+.navbar-fixed-top.navbar-shrink .navbar-brand {
+    font-size: 1.5em;
 }
 
 .navbar {
@@ -232,7 +238,10 @@ header .intro-text .skills {
     font-family: "Dilem";
     font-size: 1.5em;
     background-color: @greyMd;
+}
 
+.navbar-brand{
+    font-size: 6vw;
 }
 
 .navbar a:focus {
@@ -568,8 +577,12 @@ footer .footer-below {
 }
 
 .toastmaster{
-  background-color: @Red;
+  background-color: @darkblue;
   color: @greyMd;
+
+    a{
+        color: white;
+    }
 }
 
 ul {

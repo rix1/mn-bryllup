@@ -35,10 +35,3 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
-
-var $container = $('#container');
-// init
-$container.packery({
-    itemSelector: '.item',
-    gutter: 10
-});

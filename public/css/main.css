@@ -44,7 +44,7 @@ a:focus,
 a:active,
 a.active {
   outline: 0;
-  color: #364252;
+  color: #844352;
 }
 h1,
 h2,
@@ -102,8 +102,12 @@ hr.heart-light {
   border-color: #f2f2f2;
 }
 .btn-primary {
-  background-color: #844352;
+  color: #844352;
+  background-color: transparent;
   border: none;
+}
+.btn-primary:hover {
+  background-color: transparent;
 }
 .test {
   background-color: #bf4055;
@@ -139,7 +143,7 @@ hr.heart-primary:after {
 header {
   text-align: center;
   color: #f2f2f2;
-  background: #364252;
+  background-color: #364252;
 }
 header .container {
   padding-top: 150px;
@@ -153,7 +157,7 @@ header .intro-text .name {
   display: block;
   text-transform: uppercase;
   font-family: "Dilem";
-  font-size: 1.5em;
+  font-size: 9vw;
 }
 header .intro-text .skills {
   font-size: 1.25em;
@@ -170,8 +174,6 @@ header .intro-text .skills {
   header .intro-text .skills {
     font-size: 1.75em;
   }
-}
-@media (min-width: 768px) {
   .navbar-fixed-top {
     padding: 25px 0;
     -webkit-transition: padding .3s;
@@ -187,15 +189,18 @@ header .intro-text .skills {
   .navbar-fixed-top.navbar-shrink {
     padding: 10px 0;
   }
-  .navbar-fixed-top.navbar-shrink .navbar-brand {
-    font-size: 1.5em;
-  }
+}
+.navbar-fixed-top.navbar-shrink .navbar-brand {
+  font-size: 1.5em;
 }
 .navbar {
   text-transform: uppercase;
   font-family: "Dilem";
   font-size: 1.5em;
   background-color: #f2f2f2;
+}
+.navbar-brand {
+  font-size: 6vw;
 }
 .navbar a:focus {
   outline: 0;
@@ -417,10 +422,9 @@ footer .footer-below {
 .scroll-top .btn {
   width: 50px;
   height: 50px;
-  border-radius: 0%;
+  border-radius: 100%;
   font-size: 20px;
   line-height: 28px;
-  background-color: #364252;
 }
 .scroll-top .btn:focus {
   outline: 0;
@@ -481,8 +485,11 @@ footer .footer-below {
   opacity: 0;
 }
 .toastmaster {
-  background-color: #844352;
+  background-color: #364252;
   color: #f2f2f2;
+}
+.toastmaster a {
+  color: white;
 }
 ul {
   padding: 0 0 0 0;
