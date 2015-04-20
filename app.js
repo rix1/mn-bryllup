@@ -12,8 +12,11 @@ var debug = false;
 // In production
 if(!debug){
   var db = monk('localhost:27314/rsvp', {
-    username : 'nodeUser',
-    password : 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv'
+    //username : 'nodeUser',
+    username : 'mnAdmin',
+    //password : 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv'
+    password : 'v6vFc)NaGQ%K3Bvomjc?sJ4j^N.ELXL922zxY+Ett'
+
   });
 }else{
   var db =  monk('localhost:27017/bryllup');
