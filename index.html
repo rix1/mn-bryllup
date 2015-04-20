@@ -29,6 +29,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="/pongstagr.am-3.0.4/source/pongstagr.am.css">
 </head>
 
 <body id="page-top" class="index">
@@ -183,31 +184,7 @@
                 <h2>Bildegalleri</h2>
                 <hr class="heart-primary">
             </div>
-
-            <h1>Kommer snart...</h1>
-
-            <div class="hidden">
-
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0125.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0126.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0127.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0128.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0135.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0139.jpg" alt="">
-                </div>
-            </div>
-
+                <div class="col-md-12" id="pong"></div>
         </div>
     </div>
 </section>
@@ -228,6 +205,7 @@
         </div>
     </div>
 </section>
+
 
 
 <!-- Contact Section -->
@@ -321,7 +299,6 @@
     </div>
 </footer>
 
-
 <!-- jQuery -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -339,6 +316,17 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/main.js"></script>
+
+<script src="/pongstagr.am-3.0.4/source/pongstagr.am.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#pong').pongstgrm({
+            show: 'holckenhavn',
+            accessToken:  '2375595.e952a40.5b1e866bd58941f7a17e6025dfa11b42'
+        });
+
+    });
+</script>
 
 </body>
 </html>
