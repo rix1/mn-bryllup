@@ -25,14 +25,9 @@ if(!debug){
 
       mongodb = db;
 
-      collection.find({}, function (e, docs) {
-        if(e){
-          console.log("noope: " + e);
-        }
+      collection.find().toArray(function (err, docs) {
         console.log(docs);
       });
-
-
     });
 
   });
@@ -58,12 +53,11 @@ app.get('/', function(req, res){
 
 
   var collection = mongodb.collection("attendees");
-  collection.find({}, function (e, docs) {
-	if(e){
-		console.log("noope: " + e);
-	}
+
+  collection.find().toArray(function (err, docs) {
     res.json(docs);
   });
+
 });
 
 io.on('connection', function(socket){
