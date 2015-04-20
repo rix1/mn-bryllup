@@ -7,11 +7,11 @@ var mongo = require('mongodb');
 var monk = require('monk');
 
 
-var debug = true;
+var debug = false;
 
 // In production
 if(!debug){
-  var db = monk('localhost:27314/bryllup', {
+  var db = monk('localhost:27314/rsvp', {
     username : 'nodeUser',
     password : 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv'
   });
@@ -33,8 +33,11 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.get('/', function(req, res){
   //res.sendFile(__dirname + '/index.html');
 
-  var collection = db.get("rsvp");
+  var collection = db.get("attendees");
   collection.find({}, function (e, docs) {
+	if(e){
+		console.log("noope: " + e);
+	}
     res.json(docs);
   });
 
