@@ -8,14 +8,16 @@ body {
 }
 @font-face {
   font-family: 'Jacques';
-  /*a name to be used later*/
   src: url('/fonts/JacquesGilles.otf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 @font-face {
   font-family: 'Dilem';
-  /*a name to be used later*/
   src: url('/fonts/Dilem.ttf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 #monogram {
@@ -28,7 +30,7 @@ body {
 }
 .blue-filter {
   width: 100%;
-  height: 100%;
+  height: 80%;
   position: absolute;
   background: url("/img/hero.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -193,6 +195,9 @@ header .intro-text .skills {
   }
   header .intro-text .name {
     font-size: 4.75em;
+  }
+  .blue-filter {
+    height: 90%;
   }
   header .intro-text .skills {
     font-size: 1.75em;
