@@ -87,44 +87,27 @@ h4 {
 }
 .leaf-white {
   margin: 0 auto;
-  width: 60%;
-  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 30px;
+  background: url("/img/hr-white.png") no-repeat center center scroll;
+  -webkit-background-size: 10px;
+  -moz-background-size: 10px;
+  -o-background-size: 10px;
+  background-size: 300px;
+}
+.leaf-red {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 30px;
   background: url("/img/hr-red.png") no-repeat center center scroll;
-  -webkit-background-size: auto;
-  -moz-background-size: auto;
-  -o-background-size: auto;
-  background-size: auto;
-}
-hr.heart-white-light,
-hr.heart-light,
-hr.heart-primary {
-  margin: 25px auto 30px;
-  padding: 0;
-  max-width: 250px;
-  border: 0;
-  border-top: solid 2px;
-  text-align: center;
-}
-hr.heart-white-light:after,
-hr.heart-light:after,
-hr.heart-primary:after {
-  content: "\f08a";
-  display: inline-block;
-  position: relative;
-  top: -0.8em;
-  padding: 0 .25em;
-  font-family: FontAwesome;
-  font-size: 2em;
-}
-hr.heart-white-light {
-  border-color: #f2f2f2;
-}
-hr.heart-white-light:after {
-  color: #f2f2f2;
-  background-color: #844352;
-}
-hr.heart-light {
-  border-color: #f2f2f2;
+  -webkit-background-size: 10px;
+  -moz-background-size: 10px;
+  -o-background-size: 10px;
+  background-size: 300px;
 }
 .btn-primary {
   color: #844352;
