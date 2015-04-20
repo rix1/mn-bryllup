@@ -8,16 +8,14 @@ body {
 }
 @font-face {
   font-family: 'Jacques';
-  src: url('/fonts/JacquesGilles.otf');
-  
   /*a name to be used later*/
+  src: url('/fonts/JacquesGilles.otf');
   /*URL to font*/
 }
 @font-face {
   font-family: 'Dilem';
-  src: url('/fonts/Dilem.ttf');
-  
   /*a name to be used later*/
+  src: url('/fonts/Dilem.ttf');
   /*URL to font*/
 }
 #monogram {
