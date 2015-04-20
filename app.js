@@ -6,6 +6,7 @@ var io = require('socket.io').listen(server);
 var MongoClient = require('mongodb').MongoClient;
 
 var debug = false;
+var mongodb = null;
 
 // In production
 if(!debug){
@@ -19,13 +20,24 @@ if(!debug){
         console.log("AUTH ERROR\n" + err);
       }
       console.log("WHAT? " + result);
+      var collection = db.collection('attendees');
+
+
+      mongodb = db;
+
+      collection.find({}, function (e, docs) {
+        if(e){
+          console.log("noope: " + e);
+        }
+        console.log(docs);
+      });
+
+
     });
 
   });
 
 
-}else{
-  var db =  monk('localhost:27017/bryllup');
 }
 
 app.set('port', 8880);
@@ -45,15 +57,13 @@ app.get('/', function(req, res){
 
 
 
-  /*
-  var collection = db.get("attendees");
+  var collection = mongodb.collection("attendees");
   collection.find({}, function (e, docs) {
 	if(e){
 		console.log("noope: " + e);
 	}
     res.json(docs);
   });
-*/
 });
 
 io.on('connection', function(socket){
