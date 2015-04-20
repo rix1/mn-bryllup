@@ -3,21 +3,27 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-var mongo = require('mongodb');
-var monk = require('monk');
-
+var MongoClient = require('mongodb').MongoClient;
 
 var debug = false;
 
 // In production
 if(!debug){
-  var db = monk('localhost:27314/rsvp', {
-    //username : 'nodeUser',
-    username : 'mnAdmin',
-    //password : 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv'
-    password : 'v6vFc)NaGQ%K3Bvomjc?sJ4j^N.ELXL922zxY+Ett'
+  MongoClient.connect('mongodb://localhost:27314/rsvp', function (err, db) {
+    if(err) {
+      console.log("ConnectionERRROR:\n" + err);
+    }
+
+    db.authenticate('nodeUser', 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv', function (err, result) {
+      if(err) {
+        console.log("AUTH ERROR\n" + err);
+      }
+      console.log("WHAT? " + result);
+    });
 
   });
+
+
 }else{
   var db =  monk('localhost:27017/bryllup');
 }
@@ -36,6 +42,10 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.get('/', function(req, res){
   //res.sendFile(__dirname + '/index.html');
 
+
+
+
+  /*
   var collection = db.get("attendees");
   collection.find({}, function (e, docs) {
 	if(e){
@@ -43,7 +53,7 @@ app.get('/', function(req, res){
 	}
     res.json(docs);
   });
-
+*/
 });
 
 io.on('connection', function(socket){
