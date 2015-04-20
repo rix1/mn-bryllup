@@ -36,22 +36,12 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-.ig-xpro2 {
-  -webkit-filter: contrast(1.3) brightness(0.8) sepia(0.3) saturate(1.5) hue-rotate(-20deg);
-  filter: contrast(1.3) brightness(0.8) sepia(0.3) saturate(1.5) hue-rotate(-20deg);
-}
-.ig-sutro {
-  -webkit-filter: brightness(0.75) contrast(1.3) sepia(0.5) hue-rotate(-25deg);
-  filter: brightness(0.75) contrast(1.3) sepia(0.5) hue-rotate(-25deg);
-}
 .hero-img {
   width: 100%;
   height: 100%;
   z-index: 100;
   background-color: #364252;
-  opacity: 1;
-  -webkit-box-shadow: inset 0 0 100px 90px #0a0a0a;
-  box-shadow: inset 0 0 100px 90px rgba(10, 10, 10, 0.5);
+  opacity: 0.9;
 }
 p {
   font-family: 'Lato';
@@ -94,6 +84,16 @@ h4 {
 }
 .saturday {
   column-count: 2;
+}
+.leaf-white {
+  margin: 0 auto;
+  width: 60%;
+  height: 40px;
+  background: url("/img/hr-red.png") no-repeat center center scroll;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: auto;
 }
 hr.heart-white-light,
 hr.heart-light,
