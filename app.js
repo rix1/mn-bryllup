@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-
+var MongoClient = require('mongodb').MongoClient
+    , format = require('util').format;
 
 app.set('port', 8880);
 
@@ -30,4 +31,11 @@ io.on('connection', function(socket){
     saveFile(data.xml);
     runVerbalizor(data.owl, data.xml);
   })
+});
+
+
+MongoClient.connect('mongodb://127.0.0.1:27314/rsvp', function (err, db) {
+  if(err) throw err;
+
+  var collection = db.collection('test_insert')
 });
