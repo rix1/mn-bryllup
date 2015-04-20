@@ -2,8 +2,11 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+
+var mongo = require('mongodb');
+var monk = require('monk');
+var db =  monk('localhost:27017/bryllup');
+
 
 app.set('port', 8880);
 
@@ -15,8 +18,16 @@ app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/down.html');
+
+  //var collection = db.get("rsvp");
+  //collection.find({}, function (e, docs) {
+  //  res.json(docs);
+  //});
+
+
 });
 
 io.on('connection', function(socket){
@@ -32,10 +43,9 @@ io.on('connection', function(socket){
     runVerbalizor(data.owl, data.xml);
   })
 });
-bran
 
-MongoClient.connect('mongodb://127.0.0.1:27314/rsvp', function (err, db) {
-  if(err) throw err;
 
-  var collection = db.collection('test_insert')
+app.use(function (req, res, next) {
+  req.db = db;
+  next();
 });
