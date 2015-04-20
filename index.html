@@ -29,6 +29,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="/pongstagr.am-3.0.4/source/pongstagr.am.css">
 </head>
 
 <body id="page-top" class="index">
@@ -56,7 +57,16 @@
                     <a href="#helgen">Bryllupshelgen</a>
                 </li>
                 <li class="page-scroll">
+                    <a href="#map">Kart</a>
+                </li>
+                <li class="page-scroll">
                     <a href="#about">Om oss</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#gallery">Galleri</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#toastmaster">Toastmaster</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#rsvp">RSVP</a>
@@ -70,8 +80,8 @@
 
 <!-- Header -->
 <header>
-    <div class="blue-filter">
-        <div class="hero-img"></div>
+    <div class="blue-filter ig-xpro2">
+        <div class="hero-img "></div>
     </div>
     <div class="container">
         <div class="row">
@@ -90,13 +100,13 @@
     </div>
 </header>
 
-<!-- Portfolio Grid Section -->
+<!-- Bryllupshelgen Section -->
 <section id="helgen">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h2>Bryllupshelgen</h2>
-                <hr class="heart-primary">
+                <div class="leaf-red"></div>
                 <div class="col-sm-4">
                     <h3>Fredag</h3>
                     <div class="col-sm-12">
@@ -140,7 +150,7 @@
 </section>
 
 <!-- Map Section -->
-<div class="container-fluid mapbox">
+<div class="container-fluid mapbox" id="map">
     <iframe width='100%' height='500px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/rix1.lnh6onlm/attribution,zoompan,geocoder,share.html?access_token=pk.eyJ1Ijoicml4MSIsImEiOiJxRm5yeUJRIn0.iAC1KBPBunWCPWS3L5H9yg'></iframe>
 </div>
 
@@ -151,7 +161,7 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h2>Om oss</h2>
-                <hr class="heart-light">
+                <div class="leaf-white"></div>
             </div>
         </div>
         <div class="row">
@@ -176,49 +186,25 @@
 
 <!-- Gallery -->
 
-<section class="gallery">
+<section class="gallery" id="gallery">
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-12 ">
                 <h2>Bildegalleri</h2>
-                <hr class="heart-primary">
+                <div class="leaf-red"></div>
             </div>
-
-            <h1>Kommer snart...</h1>
-
-            <div class="hidden">
-
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0125.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0126.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0127.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0128.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0135.jpg" alt="">
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail">
-                    <img class="img-responsive" src="img/IMG_0139.jpg" alt="">
-                </div>
-            </div>
-
+                <div class="col-md-12" id="pong"></div>
         </div>
     </div>
 </section>
 
 <!-- Toastmaster -->
-<section class="toastmaster">
+<section class="toastmaster" id="toastmaster">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>Toastmaster</h2>
-                <hr class="heart-light">
+                <div class="leaf-white"></div>
                 <p>Helgens toastmaster er Mathias Dyrhol Paulsen. <br/>De som har noe på hjertet bes kontakte ham på</p>
                 <p><a href="mailto:toastmaster.mathias@gmail.com">toastmaster.mathias@gmail.com</a></p>
                 <p><i>eller</i></p>
@@ -230,13 +216,14 @@
 </section>
 
 
+
 <!-- Contact Section -->
 <section id="rsvp">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>RSVP</h2>
-                <hr class="heart-primary">
+                <div class="leaf-red"></div>
             </div>
         </div>
 
@@ -321,7 +308,6 @@
     </div>
 </footer>
 
-
 <!-- jQuery -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -339,6 +325,17 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/main.js"></script>
+
+<script src="/pongstagr.am-3.0.4/source/pongstagr.am.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#pong').pongstgrm({
+            show: 'holckenhavn',
+            accessToken:  '2375595.e952a40.5b1e866bd58941f7a17e6025dfa11b42'
+        });
+
+    });
+</script>
 
 </body>
 </html>
