@@ -62,9 +62,7 @@ a.active {
   color: #844352;
 }
 h1,
-h2,
-h5,
-h6 {
+h2 {
   text-transform: uppercase;
   font-family: 'Dilem';
   font-weight: 700;
@@ -82,8 +80,20 @@ h4 {
   font-weight: 700;
   font-size: 2em;
 }
+.fa-instagram {
+  color: #364252;
+}
+h5 {
+  font-family: 'Jacques';
+  font-weight: 600;
+  font-size: 5em;
+}
 .saturday {
   column-count: 2;
+}
+.gallery p {
+  color: #364252;
+  font-size: 2em;
 }
 .leaf-white {
   margin: 0 auto;
