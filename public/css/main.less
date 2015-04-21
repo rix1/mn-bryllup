@@ -7,7 +7,7 @@ body {
     font-style: normal;
     font-weight: 400;
     background-color: @greyMd;
-    color: @greyBlack;
+    color: @darkblue;
 }
 
 @font-face {
@@ -28,6 +28,34 @@ body {
   width: 100%;
   height: 100%;
   background-color: @darkblue;
+}
+
+
+.blue-filter {
+  width: 100%;
+  height: 80%;
+  position: absolute;
+
+  background: url("/img/hero.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: @darkblue;
+  opacity: 0.9;
+}
+
+x{
+  font-family: 'Lato';
+  font-size:15px;
+
 }
 
 p {
@@ -53,9 +81,7 @@ a.active {
 }
 
 h1,
-h2,
-h5,
-h6 {
+h2{
     text-transform: uppercase;
     font-family: 'Dilem';
     font-weight: 700;
@@ -65,6 +91,7 @@ h3 {
   font-family: 'Jacques';
   font-weight: 600;
   font-size: 2em;
+  color: @red;
 }
 
 h4 {
@@ -76,59 +103,53 @@ h4 {
   font-size: 2em;
 }
 
+.fa-instagram{
+  color: @darkblue;
+}
+
+h5 {
+  font-family: 'Jacques';
+  font-weight: 600;
+  font-size: 5em;
+
+}
 .saturday{
   column-count: 2;
+}
+
+.gallery p {
+  color: @darkblue;
+  font-size: 2em;
+
 }
 
 
 .leaf-white{
     margin: 0 auto;
-    width: 60%;
-    height: 40px;
-    background: url("/img/hr-red.png")  no-repeat center center scroll;
-    -webkit-background-size: auto;
-    -moz-background-size: auto;
-    -o-background-size: auto;
-    background-size: auto;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 30px;
+    background:  url("/img/hr-greymd.png") no-repeat center center scroll;
+    -webkit-background-size: 10px;
+    -moz-background-size: 10px;
+    -o-background-size: 10px;
+    background-size: 300px;
 }
 
-
-
-
-hr.heart-white-light,
-hr.heart-light,
-hr.heart-primary {
-    margin: 25px auto 30px;
-    padding: 0;
-    max-width: 250px;
-    border: 0;
-    border-top: solid 2px;
-    text-align: center;
-}
-hr.heart-white-light:after,
-hr.heart-light:after,
-hr.heart-primary:after {
-    content: "\f08a";
-    display: inline-block;
-    position: relative;
-    top: -.8em;
-    padding: 0 .25em;
-    font-family: FontAwesome;
-    font-size: 2em;
+.leaf-red{
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 30px;
+  background:  url("/img/hr-darkblue.png") no-repeat center center scroll;
+  -webkit-background-size: 10px;
+  -moz-background-size: 10px;
+  -o-background-size: 10px;
+  background-size: 300px;
 }
 
-hr.heart-white-light{
-  border-color: @greyMd;
-
-}
-hr.heart-white-light:after{
-  color: @greyMd;
-  background-color: @red;
-}
-
-hr.heart-light {
-    border-color: @greyMd;
-}
 
 .btn-primary{
     color: @red;
@@ -185,7 +206,7 @@ hr.heart-primary:after {
 header {
     text-align: center;
     color: @greyMd;
-    background-color: @darkblue;
+    background-color: transparent;
 }
 
 header .container {
@@ -219,6 +240,10 @@ header .intro-text .skills {
 
     header .intro-text .name {
         font-size: 4.75em;
+    }
+
+    .blue-filter{
+        height: 90%;
     }
 
     header .intro-text .skills {
@@ -274,7 +299,11 @@ header .intro-text .skills {
 
 .navbar-default,
 .navbar-inverse {
-    border: 0;
+  border: 0;
+
+  -webkit-box-shadow: 0px 6px 10px 0px rgba(54,66,82,0.39);
+  -moz-box-shadow: 0px 6px 10px 0px rgba(54,66,82,0.39);
+  box-shadow: 0px 6px 10px 0px rgba(54,66,82,0.39);
 }
 
 section {
@@ -499,6 +528,10 @@ footer .footer-below {
     text-align: center;
     font-size: 20px;
     line-height: 45px;
+}
+
+.btn-success{
+  background-color: @red;
 }
 
 .btn:focus,

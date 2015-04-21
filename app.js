@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
@@ -10,30 +11,7 @@ var debug = false;
 
 // In production
 if(!debug){
-  /*MongoClient.connect('mongodb://localhost:27314/rsvp', function (err, db) {
-    if(err) {
-      console.log("ConnectionERRROR:\n" + err);
-    }
-
-    db.authenticate('nodeUser', 'grLeTtkq6AZv4bWD3hGkg8@8vuM;/boC#mY2D&.mv', function (err, result) {
-      if(err) {
-        console.log("AUTH ERROR\n" + err);
-      }
-      console.log("WHAT? " + result);
-      var collection = db.collection('attendees');
-
-
-      mongodb = db;
-
-      collection.find().toArray(function (err, docs) {
-        console.log(docs);
-      });
-    });
-
-  });*/
-
   mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
-
 }else{
   mongoose.connect('mongodb://localhost/bryllup');
 }
@@ -63,7 +41,6 @@ db.once('open', function (callback) {
 
 });
 
-
 app.set('port', 3000);
 
 server.listen(app.get('port'), function(){
@@ -74,8 +51,19 @@ app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.get('/', function(req, res){
-  //res.sendFile(__dirname + '/down.html');
+  res.sendFile(__dirname + '/index.html');
+});
 
+
+app.post('/', function (req, res) {
+  console.log("Someone tries to RSVP");
+  var inn = req.body;
+  res.json(inn);
+  console.log(inn);
 });
