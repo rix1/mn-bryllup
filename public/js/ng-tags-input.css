@@ -1,7 +1,6 @@
 tags-input {
   display: block;
   color: #333333;
-  font-size: 1.5em;
   border-bottom: solid 2px #844352;
 }
 tags-input *, tags-input *:before, tags-input *:after {
@@ -52,6 +51,8 @@ tags-input .tags .tag-item {
 tags-input .tags .tag-item.selected {
   background: #844352;
 }
+
+
 tags-input .tags .tag-item .remove-button {
   margin: 0 0 0 5px;
   padding: 0;
@@ -59,7 +60,7 @@ tags-input .tags .tag-item .remove-button {
   background: none;
   cursor: pointer;
   vertical-align: middle;
-  font: bold 16px Arial, sans-serif;
+  font: bold 1.5em Arial, sans-serif;
   color: #DBD9D6;
 }
 tags-input .tags .tag-item .remove-button:active {
@@ -74,7 +75,7 @@ tags-input .tags .input {
   padding-left: 5px;
   float: left;
   height: 26px;
-  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 1.5em "Lato", Helvetica, Arial, sans-serif;
 }
 tags-input .tags .input.invalid-tag {
   color: #844352;
@@ -106,8 +107,9 @@ tags-input[disabled] .tags .tag-item {
 tags-input[disabled] .tags .tag-item .remove-button {
   cursor: default;
   color: #585858;
-
 }
+
+
 tags-input[disabled] .tags .tag-item .remove-button:active {
   color: #585858;
 }

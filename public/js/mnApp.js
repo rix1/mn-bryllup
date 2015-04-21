@@ -4,11 +4,7 @@ angular.module('mnApp', ['ngTagsInput'])
         function ($scope, $http, $timeout) {
 
             $scope.showForm = true;
-            $scope.names = [
-                { text: 'Rikard 1' },
-                { text: 'Rikard 2' },
-                { text: 'Rikard 3' }
-            ];
+            $scope.names = [];
 
             $scope.selectA = "";
             $scope.selectB = "";
@@ -17,12 +13,14 @@ angular.module('mnApp', ['ngTagsInput'])
                 console.log(val);
                 if(val == 'a'){
                     $scope.positive = true;
+                    $scope.negative = false;
                     $scope.selectA = "btn-selected";
                     $scope.selectB = "";
                 }
 
                 if(val == 'b'){
                     $scope.positive = false;
+                    $scope.negative = true;
                     $scope.selectB = "btn-selected";
                     $scope.selectA = "";
                 }
