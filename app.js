@@ -3,14 +3,13 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 
 var debug = false;
-var mongodb = null;
 
 // In production
 if(!debug){
-  MongoClient.connect('mongodb://localhost:27314/rsvp', function (err, db) {
+  /*MongoClient.connect('mongodb://localhost:27314/rsvp', function (err, db) {
     if(err) {
       console.log("ConnectionERRROR:\n" + err);
     }
@@ -30,10 +29,40 @@ if(!debug){
       });
     });
 
+  });*/
+
+  mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
+
+}else{
+  mongoose.connect('mongodb://localhost/bryllup');
+}
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log("Database connection established");
+
+  var rsvpSchema = mongoose.Schema({
+    name: String,
+    email: String
   });
 
+/*  var Feedback = mongoose.model('Feedback', rsvpSchema);
 
-}
+  var test1 = new Feedback({
+    name: 'Siri',
+    email: 's.ho@f,.com'
+  });
+
+  test1.save(function (err, test1) {
+    if(err) return console.error(err);
+    console.log("something saved");
+  });*/
+
+
+});
+
 
 app.set('port', 3000);
 
@@ -49,30 +78,4 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.get('/', function(req, res){
   //res.sendFile(__dirname + '/down.html');
 
-  var collection = mongodb.collection("attendees");
-
-  collection.find().toArray(function (err, docs) {
-    res.json(docs);
-  });
-
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
-  socket.on('input fields', function(data){
-    console.log('data received: '+ data.owl + " " + data.xml);
-    saveFile(data.xml);
-    runVerbalizor(data.owl, data.xml);
-  })
-});
-
-
-app.use(function (req, res, next) {
-  req.db = db;
-  next();
 });
