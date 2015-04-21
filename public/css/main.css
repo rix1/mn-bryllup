@@ -8,14 +8,16 @@ body {
 }
 @font-face {
   font-family: 'Jacques';
-  /*a name to be used later*/
   src: url('/fonts/JacquesGilles.otf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 @font-face {
   font-family: 'Dilem';
-  /*a name to be used later*/
   src: url('/fonts/Dilem.ttf');
+  
+  /*a name to be used later*/
   /*URL to font*/
 }
 #monogram {
@@ -240,6 +242,9 @@ header .intro-text .skills {
 .navbar-default,
 .navbar-inverse {
   border: 0;
+  -webkit-box-shadow: 0px 6px 10px 0px rgba(54, 66, 82, 0.39);
+  -moz-box-shadow: 0px 6px 10px 0px rgba(54, 66, 82, 0.39);
+  box-shadow: 0px 6px 10px 0px rgba(54, 66, 82, 0.39);
 }
 section {
   padding: 100px 0;
