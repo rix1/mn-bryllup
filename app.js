@@ -16,9 +16,9 @@ var debug = true;
 
 // In production
 if(!debug){
-  mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
+  //mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
 }else{
-  mongoose.connect('mongodb://localhost/bryllup');
+  //mongoose.connect('mongodb://localhost/bryllup');
 }
 
 
@@ -82,9 +82,9 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 
-  Reply.find(function (err, doc) {
-    console.log(doc);
-  });
+  //Reply.find(function (err, doc) {
+  //  console.log(doc);
+  //});
 });
 
 var verifyToken = function (token) {
@@ -120,10 +120,10 @@ app.post('/', function (req, res) {
       name: inn.name,
       email: inn.email
     });
-
-    gunnar.save(function (err, gunnar) {
-      if(err) return console.error(err);
-      console.log("Saved: " + gunnar);
-    });
+    //
+    //gunnar.save(function (err, gunnar) {
+    //  if(err) return console.error(err);
+    //  console.log("Saved: " + gunnar);
+    //});
   }
 });
