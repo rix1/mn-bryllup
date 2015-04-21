@@ -1,11 +1,10 @@
 angular.module('mnApp', [])
 
-    .controller('rsvpCtrl', [ '$scope',
-        function ($scope) {
+    .controller('rsvpCtrl', [ '$scope', '$http',
+        function ($scope, $http) {
 
-            $scope.showForm = false;
+            $scope.showForm = true;
 
-            $scope.heading = 'RSVP';
             $scope.area = '';
 
                 $scope.access = function (code) {
@@ -20,5 +19,17 @@ angular.module('mnApp', [])
                 form.area = area;
                 console.log(form);
             };
+
+            var request = $http({
+                method: "post",
+                url: "http://localhost:8880/",
+                data:{
+                    name: "Gunnar",
+                    alder: "Frank12"
+                }
+            });
             
+            request.success(function () {
+                    console.log("YEAA");
+            })
         }]);
