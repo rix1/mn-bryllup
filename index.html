@@ -244,8 +244,8 @@
                         <form name="tokenForm" class="form-inline" ng-if="!showForm">
                             <div class="form-group">
                                 <label for="tokenField"></label>
-                                <input name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">
-                                <button type="submit" class="btn btn-default" ng-click="testSecret(token)" >Godkjenn</button>
+                                <input autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">
+                                <button type="submit" class="btn btn-selected" ng-click="testSecret(token)" >Godkjenn</button>
                             </div>
                             <p class="errormessage animated fadeInDown">{{error}}</p>
 
@@ -257,64 +257,82 @@
                     <div class="col-lg-8 col-lg-offset-2 animated fadeIn" ng-if="showForm">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                        <p>Vennligst velg det som passer deg:</p>
+                        <p>Vennligst velg det som passer deg eller dere:</p>
                         <div class="col-xs-12 selectButtons">
-                            <button type="button" ng-click="selected('a')" class="btn btn-select {{selectA}}">Jeg/vi kommer!</button>
-                            <button type="button" ng-click="selected('b')" class="btn  btn-select {{selectB}}">Jeg kan dessverre ikke delta</button>
+                            <button type="button" ng-click="selected('a')" class="btn btn-select {{selectA}}">En eller flere kan komme</button>
+                            <button type="button" ng-click="selected('b')" class="btn  btn-select {{selectB}}">Kan dessverre ikke komme</button>
                         </div>
 
-                        <form name="sentMessage" id="contactForm" novalidate > <!--ng-submit-->
-                            <div class="row control-group">
-                                <div class="form-group col-xs-6 floating-label-form-group controls">
-                                    <!--<label>Name</label>-->
-                                    <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name." ng-model="form.name">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group col-xs-6 floating-label-form-group controls">
+                        <form name="sentMessage" id="contactForm" novalidate> <!--ng-submit-->
+                            <div class="row control-group" >
+                                <!-- <div class="form-group col-xs-6 floating-label-form-group controls">
+                                     &lt;!&ndash;<label>Name</label>&ndash;&gt;
+                                     <input type="text" class="form-control" placeholder="Navn" id="name" required data-validation-required-message="Vennligst skriv inn navnet ditt." ng-model="form.name">
+                                 </div>-->
+                                <p style="font-size: 1.2em" ng-if="positive">Supert! Skriv inn en epost vi kan kontakte
+                                    <br/> deg/dere på, og fortell oss hvem som kommer!</p>
+
+                                <div class="form-group col-xs-8 col-xs-push-2 floating-label-form-group controls" ng-show="positive">
                                     <!--<label>Email Address</label>-->
-                                    <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address." ng-model="form.email">
-                                    <p class="help-block text-danger"></p>
+                                    <input type="email" class="form-control" placeholder="E-post" autocomplete="off" id="email" required data-validation-required-message="Vennligst skriv inn email adressen din." ng-model="form.email">
                                 </div>
+                                <p style="font-size: 1.2em" ng-if="negative">Æsj, det var dumt! Skriv inn navn og epost for å bekrefte.</p>
+                                <div class="form-group col-xs-6 floating-label-form-group controls" ng-show="negative">
+                                    <!--<label>Email Address</label>-->
+                                    <input type="text" class="form-control" placeholder="Navn" autocomplete="off" id="name" required data-validation-required-message="Vennligst skriv navnet ditt." ng-model="form.name">
+                                </div>
+                                <div class="form-group col-xs-6 floating-label-form-group controls" ng-show="negative">
+                                    <!--<label>Email Address</label>-->
+                                    <input type="email" class="form-control" placeholder="E-post" autocomplete="off" id="email" required data-validation-required-message="Vennligst skriv inn email adressen din." ng-model="form.email">
+                                </div>
+
+
                             </div>
                             <div class="animated fadeIn" ng-show="positive">
-                                <div class="row control-group">
-                                    <div class="form-group col-xs-12 floating-label-form-group controls">
-                                        <i>Når kommer du/dere?</i>
-                                        <div class="group">
-                                            <div class="col-xs-6">
-                                                <label for="inlineRadio1" class="radio-inline">
-                                                    <input name="kommer" ng-model="form.arriving" id="inlineRadio1" value="fri" type="radio"/> Fredag
-                                                </label>
-                                            </div>
-                                            <div class="col-xd-6">
-                                                <label for="inlineRadio2" class="radio-inline">
-                                                    <input name="kommer" ng-model="form.arriving" id="inlineRadio2" value="sat" type="radio"/> Lørdag
-                                                </label>
-                                            </div>
+                                <div class="row control-group center-text">
+                                    <div style="margin-top: 15px" class="form-group col-xs-8 col-xs-push-2 floating-label-form-group controls">
+                                        <tags-input ng-model="names"></tags-input>
+                                        <p style="font-size: 1em; margin-top: -15px">Skill navn med komma.</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-push-2">
+                                        <div ng-repeat="name in names" class="namebox col-xs-6 col-sm-4 col-md-3 animated fadeIn">
+                                            <p style="margin-bottom: -10px; font-size: 1.2em">{{name.text}} deltar</p>
+                                            <div><label><input type="checkbox" ng-model="form.participateFri" value="fri" id="inlineCheckbox1"> Fredag</label></div>
+                                            <div><label><input type="checkbox" ng-model="form.participateSat" value="fri" id="inlineCheckbox2"> Lørdag</label></div>
+                                            <div><label><input type="checkbox" ng-model="form.participateSun" value="fri" id="inlineCheckbox3"> Søndag</label></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row control-group">
-                                    <div class="form-group col-xs-12 floating-label-form-group controls">
-                                        <p>Hvem kommer?</p>
-                                        <tags-input ng-model="names"></tags-input>
-                                    </div>
-                                </div>
 
 
+                                <!--                                <div class="row control-group checkboxes">
+                                                                    <p>Hvilke dager kan du/dere delta?</p>
+                                                                    <div class="checkbox-inline">
+                                                                        <label><input type="checkbox" ng-model="form.participateFri" value="fri" id="inlineCheckbox1">Fredag</label>
+                                                                    </div>
+                                                                    <div class="checkbox-inline">
+                                                                        <label><input type="checkbox" ng-model="form.participateSat" value="sat">Lørdag</label>
+                                                                    </div>
+                                                                    <div class="checkbox-inline">
+                                                                        <label><input type="checkbox" ng-model="form.participateSun" value="sun">Søndag</label>
+                                                                    </div>
+                                                                </div>-->
+
                                 <div class="row control-group">
+                                    <p>Har du noe vi bør vite om (matallergier, spørsmål eller annet)?</p>
                                     <div class="form-group col-xs-12 floating-label-form-group controls">
                                         <!--<label>Message</label>-->
                                         <div class="textArea">
                                             <textarea ng-model="$parent.area" rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                         </div>
-                                        <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
                             </div>
-                            <div id="success"></div>
                             <div class="row">
-                                <div class="form-group col-xs-12">
+                                <div class="form-group col-xs-12" ng-show="positive || negative">
                                     <button type="submit" ng-click="submit(form, area); form=''; $parent.area=''" class="center-block btn btn-select">SEND</button>
                                 </div>
                             </div>

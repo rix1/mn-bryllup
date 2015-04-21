@@ -8,16 +8,14 @@ body {
 }
 @font-face {
   font-family: 'Jacques';
-  src: url('/fonts/JacquesGilles.otf');
-  
   /*a name to be used later*/
+  src: url('/fonts/JacquesGilles.otf');
   /*URL to font*/
 }
 @font-face {
   font-family: 'Dilem';
-  src: url('/fonts/Dilem.ttf');
-  
   /*a name to be used later*/
+  src: url('/fonts/Dilem.ttf');
   /*URL to font*/
 }
 #monogram {
@@ -363,7 +361,7 @@ section.success a.active {
 .floating-label-form-group {
   position: relative;
   margin-bottom: 0;
-  padding-bottom: .5em;
+  padding-bottom: 0em;
   border-bottom: 1px solid #f2f2f2;
 }
 .floating-label-form-group input,
@@ -381,7 +379,7 @@ section.success a.active {
   resize: none;
 }
 .selectButtons {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .floating-label-form-group textarea {
   border-bottom: none;
@@ -577,6 +575,19 @@ footer .footer-below {
   background-color: white;
   padding: 15px;
   border: solid 2px #844352;
+}
+#rsvp p {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+.namebox {
+  margin-top: -40px;
+  margin-bottom: 10px;
+}
+.checkboxes {
+  font-size: 20px;
+  color: #364252;
 }
 ul {
   padding: 0 0 0 0;
