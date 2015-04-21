@@ -1,7 +1,6 @@
 tags-input {
   display: block;
   color: #333333;
-  font-size: 1.5em;
   border-bottom: solid 2px #844352;
 }
 tags-input *, tags-input *:before, tags-input *:after {
@@ -43,12 +42,14 @@ tags-input .tags .tag-item {
   display: inline-block;
   float: left;
   font: 14px "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
   height: 26px;
   line-height: 25px;
   border: 1px solid #acacac;
   border-radius: 3px;
   background: #364252;
 }
+
 tags-input .tags .tag-item.selected {
   background: #844352;
 }
