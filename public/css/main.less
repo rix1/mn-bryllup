@@ -52,12 +52,6 @@ body {
   opacity: 0.9;
 }
 
-x{
-  font-family: 'Lato';
-  font-size:15px;
-
-}
-
 p {
     font-family: 'Lato';
     font-size: 15px;
@@ -148,6 +142,14 @@ h5 {
   -moz-background-size: 10px;
   -o-background-size: 10px;
   background-size: 300px;
+}
+
+.center-img {
+}
+
+.center-img img{
+  width: 40vw;
+  margin: 0 auto;
 }
 
 
@@ -462,17 +464,34 @@ section.success a.active {
     resize: none;
 }
 
+.selectButtons{
+  margin-bottom: 20px;
+}
+
+.floating-label-form-group textarea{
+  border-bottom: none;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  outline: 0;
+  color: @greyMd;
+}
+
 .floating-label-form-group label {
     display: block;
     z-index: 0;
     position: relative;
     top: 2em;
     margin: 0;
-    font-size: .85em;
+    font-size: 1.5em;
     line-height: 1.764705882em;
     vertical-align: middle;
     vertical-align: baseline;
-    opacity: 0;
+    //opacity: 0;
     -webkit-transition: top .3s ease,opacity .3s ease;
     -moz-transition: top .3s ease,opacity .3s ease;
     -ms-transition: top .3s ease,opacity .3s ease;
@@ -487,11 +506,18 @@ section.success a.active {
 .floating-label-form-group-with-value label {
     top: 0;
     opacity: 1;
+    font-size: 1.5em;
 }
 
 .floating-label-form-group-with-focus label {
-    color: @red;
+    //color: @red;
 }
+
+.errormessage{
+  color: @red;
+  padding-top: 10px;
+}
+
 
 form .row:first-child .floating-label-form-group {
     border-top: 1px solid @greyMd;
@@ -556,6 +582,44 @@ footer .footer-below {
     font-size: 20px;
     line-height: 28px;
 }
+
+.btn-select {
+  margin-top: 15px;
+  border: solid 2px @red;
+  border-radius: 0;
+  font-size: 1.5vmax;
+  font-family: 'Lato';
+  font-weight: 300;
+  text-transform: uppercase;
+  color: @red;
+  background: transparent;
+  transition: all .3s ease-in-out;
+}
+
+.group{
+  margin-bottom: 30px;
+}
+
+.btn-select:hover,
+.btn-select:focus,
+.btn-select:active,
+.btn-select.active{
+  border: solid 2px @lightblue;
+  color: @greyMd;
+  background: @lightblue;
+}
+
+.btn-selected{
+  border: solid 2px @darkblue !important;
+  background-color: @darkblue !important;
+  color: @greyMd;
+}
+.btn-not-selected{
+  border: solid 2px @red !important;
+  background-color: transparent !important;
+  color: @red;
+}
+
 
 .scroll-top .btn:focus {
     outline: 0;
@@ -632,6 +696,12 @@ footer .footer-below {
     a{
         color: white;
     }
+}
+
+.textArea{
+  background-color: white;
+  padding: 15px;
+  border: solid 2px @red;
 }
 
 ul {

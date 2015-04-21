@@ -45,10 +45,6 @@ body {
   background-color: #364252;
   opacity: 0.9;
 }
-x {
-  font-family: 'Lato';
-  font-size: 15px;
-}
 p {
   font-family: 'Lato';
   font-size: 15px;
@@ -125,6 +121,10 @@ h5 {
   -moz-background-size: 10px;
   -o-background-size: 10px;
   background-size: 300px;
+}
+.center-img img {
+  width: 40vw;
+  margin: 0 auto;
 }
 .btn-primary {
   color: #844352;
@@ -380,17 +380,30 @@ section.success a.active {
   box-shadow: none!important;
   resize: none;
 }
+.selectButtons {
+  margin-bottom: 20px;
+}
+.floating-label-form-group textarea {
+  border-bottom: none;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  outline: 0;
+  color: #f2f2f2;
+}
 .floating-label-form-group label {
   display: block;
   z-index: 0;
   position: relative;
   top: 2em;
   margin: 0;
-  font-size: .85em;
+  font-size: 1.5em;
   line-height: 1.764705882em;
   vertical-align: middle;
   vertical-align: baseline;
-  opacity: 0;
   -webkit-transition: top .3s ease,opacity .3s ease;
   -moz-transition: top .3s ease,opacity .3s ease;
   -ms-transition: top .3s ease,opacity .3s ease;
@@ -403,9 +416,11 @@ section.success a.active {
 .floating-label-form-group-with-value label {
   top: 0;
   opacity: 1;
+  font-size: 1.5em;
 }
-.floating-label-form-group-with-focus label {
+.errormessage {
   color: #844352;
+  padding-top: 10px;
 }
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid #f2f2f2;
@@ -459,6 +474,39 @@ footer .footer-below {
   border-radius: 100%;
   font-size: 20px;
   line-height: 28px;
+}
+.btn-select {
+  margin-top: 15px;
+  border: solid 2px #844352;
+  border-radius: 0;
+  font-size: 1.5vmax;
+  font-family: 'Lato';
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #844352;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.group {
+  margin-bottom: 30px;
+}
+.btn-select:hover,
+.btn-select:focus,
+.btn-select:active,
+.btn-select.active {
+  border: solid 2px #3d5567;
+  color: #f2f2f2;
+  background: #3d5567;
+}
+.btn-selected {
+  border: solid 2px #364252 !important;
+  background-color: #364252 !important;
+  color: #f2f2f2;
+}
+.btn-not-selected {
+  border: solid 2px #844352 !important;
+  background-color: transparent !important;
+  color: #844352;
 }
 .scroll-top .btn:focus {
   outline: 0;
@@ -524,6 +572,11 @@ footer .footer-below {
 }
 .toastmaster a {
   color: white;
+}
+.textArea {
+  background-color: white;
+  padding: 15px;
+  border: solid 2px #844352;
 }
 ul {
   padding: 0 0 0 0;
