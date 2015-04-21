@@ -48,7 +48,7 @@ db.once('open', function (callback) {
     email: String
   });
 
-/*  var Feedback = mongoose.model('Feedback', rsvpSchema);
+  var Feedback = mongoose.model('Feedback', rsvpSchema);
 
   var test1 = new Feedback({
     name: 'Siri',
@@ -58,8 +58,7 @@ db.once('open', function (callback) {
   test1.save(function (err, test1) {
     if(err) return console.error(err);
     console.log("something saved");
-  });*/
-
+  });
 
 });
 
