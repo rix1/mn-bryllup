@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var csrf = require('csurf');
+var expressValidator = require('express-validator');
+var helmet = require('helmet');
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
@@ -94,9 +97,11 @@ if(false) {
   });
 }
 
+app.use(helmet());
 app.use(cookieParser(config.cookieSecret, { httpOnly: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(expressValidator([]));
 
 app.use(session({
   name: 'sessionID',
@@ -146,6 +151,9 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
+
+// ========= GET =========
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 
@@ -160,22 +168,37 @@ var verifyToken = function (token) {
   }else return false;
 };
 
+// ========= POST =========
+
 app.post('/', function (req, res) {
   console.log("Someone tries to RSVP");
   var inn = req.body;
-
   console.log(inn);
 
-  if(inn.token){
-    console.log("Token Received: " + inn.token);
-    if(verifyToken(inn.token)){
-      console.log("everything ok");
-      res.status(200);
-      res.send("Okai");
-    }else{
-      console.log("NOT K, OKAI?");
-      res.status(403);
-      res.send("Nope!");
+  // TODO: test/assert all important fields!
+  req.assert('token', 'The token is required').notEmpty();
+  req.sanitize('token').toString();
+
+  var errors = req.validationErrors();
+
+
+  if(errors){
+    res.status(403);
+    res.send(errors);
+  }else {
+
+
+    if (inn.token) {
+      console.log("Token Received: " + inn.token);
+      if (verifyToken(inn.token)) {
+        console.log("everything ok");
+        res.status(200);
+        res.send("Okai");
+      } else {
+        console.log("NOT K, OKAI?");
+        res.status(403);
+        res.send("Nope!");
+      }
     }
   }
   if(inn.form) {
