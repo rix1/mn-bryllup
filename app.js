@@ -16,9 +16,9 @@ var debug = true;
 
 // In production
 if(!debug){
-  //mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
+  mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
 }else{
-  //mongoose.connect('mongodb://localhost/bryllup');
+  mongoose.connect('mongodb://localhost/bryllup');
 }
 
 
@@ -26,6 +26,73 @@ var config = {};
 
 config.cookieSecret = "6L2pmgZ4QiRTVyhTVaerWT7Z9qUN";
 config.authKey = "r4Ket-s4kzR";
+config.mg_api_key = "key-609fe452374be0986a6acec3d32cccc2";
+config.mg_domain = "mail.martineognikolai.dk";
+
+var mailgun = require('mailgun-js')({
+  apiKey: config.mg_api_key,
+  domain: config.mg_domain
+});
+
+
+var data = {
+  from: 'Snart Gift <martine.nikolai@gmail.com>',
+  to: 'rikardeide@gmail.com',
+  subject: 'Skal vi se',
+  text: 'Jeg prøver å sende meg selv mail!'
+};
+
+var list = mailgun.lists('guest@mail.martineognikolai.dk');
+
+list.info(function (err, data) {
+  // `data` is mailing list info
+  console.log(data);
+});
+
+
+var getMailListMembers = function () {
+  list.members().list(function (err, members) {
+
+  });
+};
+
+var addToMailingList = function (email) {
+  var member = [{
+    address: email
+  }];
+  list.members().add({members: member, subscribed: true}, function (err, body) {
+    console.log(body);
+    if(err) {
+      // Log error
+    } else{
+      console.log("Email added to list");
+    }
+  });
+};
+
+var sendConfirmationMail = function (email) {
+
+};
+
+// Route to verift email
+app.get('/validate/:mail', function (req, res) {
+  console.log("validating email:");
+  console.log(req.params.mail);
+
+  //TODO: Verify email address.
+
+  res.send("heisann prøvder du å validere?");
+});
+
+// Sending email example
+if(false) {
+  mailgun.messages().send(data, function (err, body) {
+    if (err) {
+      console.log("ERROR: couln't send mail! ");
+    }
+    console.log(body);
+  });
+}
 
 app.use(cookieParser(config.cookieSecret, { httpOnly: true }));
 app.use(bodyParser.json());
@@ -82,9 +149,9 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 
-  //Reply.find(function (err, doc) {
-  //  console.log(doc);
-  //});
+  Reply.find(function (err, doc) {
+    console.log(doc);
+  });
 });
 
 var verifyToken = function (token) {
@@ -111,19 +178,34 @@ app.post('/', function (req, res) {
       res.send("Nope!");
     }
   }
-  if(inn.form){
-    console.log("form received");
+  if(inn.form) {
+    if (inn.token && verifyToken(token)) { // User "authenticated"
 
-    // TODO: Sanitize/validate
+      console.log("form received");
 
-    var gunnar = new Reply({
-      name: inn.name,
-      email: inn.email
-    });
-    //
-    //gunnar.save(function (err, gunnar) {
-    //  if(err) return console.error(err);
-    //  console.log("Saved: " + gunnar);
-    //});
+      // TODO: Sanitize/validate
+
+
+      var clean = {}; // Sanitized fields
+
+      /*---------Database calls -------*/
+
+      var gunnar = new Reply({
+        name: clean.name,
+        email: clean.email
+      });
+
+      gunnar.save(function (err, gunnar) {
+        if (err) return console.error(err);
+        console.log("Saved: " + gunnar);
+      });
+
+
+      /*--------- Everything ok? Send confirmation email -------*/
+
+      addToMailingList(clean.email);
+      sendConfirmationMail(clean.email);
+
+    }
   }
 });
