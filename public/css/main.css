@@ -73,7 +73,7 @@ h3 {
   font-family: 'Jacques';
   font-weight: 600;
   font-size: 2em;
-  color: #844352;
+  color: #f2f2f2;
 }
 h4 {
   padding-top: 5px;
@@ -424,6 +424,19 @@ a.active {
 }
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid #f2f2f2;
+}
+.red {
+  color: #844352;
+}
+.form-confirmation h2 {
+  font-size: 3vmax;
+  font-family: 'Lato';
+  font-weight: 200;
+  text-transform: none;
+  text-align: center;
+  color: #b5b7b7;
+  line-height: 1.2em;
+  font-style: italic;
 }
 footer {
   color: #f2f2f2;
