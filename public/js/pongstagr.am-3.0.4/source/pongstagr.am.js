@@ -148,9 +148,9 @@
             modal += '    <img src="'+ options.data.profile_picture +'" width="'+ options.dflt.picture_size +'" height="'+ options.dflt.picture_size +'" class="">'
             modal += '  </a>'
             modal += '  <div class="modal-body">'
-            modal += '      <h5 class="media-heading">'
+            modal += '      <h4 class="media-heading">'
             modal += '        <a href="https://instagram.com/'+ options.data.username +'">'+ options.data.username +'</a>'
-            modal += '      </h5>'
+            modal += '      </h4>'
 
           options.data.caption !== null ?
             modal += '      <p>'+ options.data.caption +'</p>': ""
@@ -164,9 +164,9 @@
               modal += '    <img src="'+ b.from.profile_picture +'" width="'+ options.dflt.picture_size +'" height="'+ options.dflt.picture_size +'">'
               modal += '  </a>'
               modal += '  <div class="modal-body">'
-              modal += '      <h5 class="media-heading">'
+              modal += '      <h4 class="media-heading">'
               modal += '        <a href="https://instagram.com/'+ b.from.username +'">'+ b.from.username +'</a>'
-              modal += '      </h5>'
+              modal += '      </h4>'
               modal += '      <p>'+ b.text +'</p>'
               modal += '  </div>'
               modal += '</div>'
