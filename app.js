@@ -196,8 +196,8 @@ app.post('/', function (req, res) {
         res.send("Okai");
       } else {
         console.log("NOT K, OKAI?");
-        res.status(403);
-        res.send("Nope!");
+        res.status(401);
+        res.send("Token-error");
       }
     }
   }

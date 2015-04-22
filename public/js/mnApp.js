@@ -9,8 +9,8 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
     .controller('rsvpCtrl', [ '$scope', '$http', '$timeout', '_',
         function ($scope, $http, $timeout, _) {
 
-            $scope.showForm = false;
-            $scope.showValidation = true;
+            $scope.showForm = true;
+            $scope.showValidation = false;
             $scope.participants = {};
 
             $scope.selectA = "";
@@ -136,10 +136,20 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                         $scope.showForm = false;
                         $scope.showValidation = false;
                         $scope.showSucccess = true;
-                    }).error(function (e) {
-                        $scope.areaError = 'Feil på serveren. Send innholdet i feltet over på epost til martine.nikolai@gmail.com';
-                        $scope.errorArea = true;
-                        $scope.area = JSON.stringify(payload.email) + JSON.stringify(_.flatten(payload.people)) + JSON.stringify(payload.msg);
+                    }).error(function (data, status, headers, config) {
+
+                        console.log(status);
+                        if(status == 400){
+                            $scope.areaError = 'Prøver du å hacke meg? Det er noe galt med feltene, prøv igjen.';
+                            $scope.errorArea = true;
+                        }else if(status == 401){
+                            $scope.areaError = data +'. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
+                            $scope.errorArea = true;
+                        }else{
+                            $scope.areaError = 'Feil på serveren. Send innholdet i feltet over på epost til martine.nikolai@gmail.com';
+                            $scope.errorArea = true;
+                            $scope.area = JSON.stringify(payload.email) + JSON.stringify(_.flatten(payload.people)) + JSON.stringify(payload.msg);
+                        }
                     });
 
 
@@ -156,21 +166,22 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                         $scope.showForm = false;
                         $scope.showValidation = false;
                         $scope.showSucccess = true;
-                    }).error(function (e) {
-                        $scope.emailError = 'Feil på serveren. Send heller epost på martine.nikolai@gmail.com ';
-                        $scope.errorEmail = true;
+                    }).error(function (data, status, headers, config) {
+                        console.log(status);
+                        if(status == 400){
+                            $scope.emailError = 'Prøver du å hacke meg? Det er noe galt med feltene, prøv igjen.';
+                            $scope.errorEmail = true;
+                        }else if(status == 401){
+                            $scope.emailError = data +'. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
+                            $scope.errorEmail = true;
+                        }else{
+                            $scope.emailError = 'Feil på serveren. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
+                            $scope.errorEmail = true;
+                        }
                     });
                 }else{
                     // What.jpg
                 }
-
-
-
-                /*                $http.post('/', form).success(function () {
-                 console.log("Form posted");
-                 }).error(function () {
-                 $scope.loginMsg = 'Wrong credentials, try again.';
-                 });*/
             };
 
             var testDays = function () {
