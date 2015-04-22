@@ -17,7 +17,7 @@
   padding: 5px 10px;
   margin: 2px;
   font-size: 22px;
-  color: #d9534f;
+  color: #844352;
   background-color: #fff;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -130,7 +130,7 @@
 }
 
 [data-type="profile"] .user-data a {
-  color: #F0AD4E;
+  color: #844352;
 }
 
 [data-type="profile"] .counts .h4 {
@@ -139,7 +139,7 @@
   margin: 2px 5px;
   font-size: 18px;
   font-weight: bold;
-  color: #4f405f;
+  color: #844352;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.35);
   border-top-right-radius: 3px;
@@ -152,7 +152,7 @@
   display: block;
   clear: both;
   font-size: 12px;
-  color: #4f405f;
+  color: #844352;
   opacity: 1;
 }
 
@@ -212,12 +212,17 @@
 }
 
 .modal-header {
-  padding: 5px 10px;
+    padding: 5px 10px;
+    color: #364252;
+
 }
 
 .modal-body {
-  padding: 0;
+    padding: 0;
+    color: #364252;
 }
+
+
 
 .modal-body > .row {
   margin-right: 0;
@@ -306,7 +311,7 @@
 }
 
 .media-comment > .media:first-child {
-  border-top: 5px solid #d9534f;
+  border-top: 5px solid #844352;
   border-bottom: 1px solid #eee;
 }
 
@@ -450,17 +455,23 @@ fieldset[disabled] .media-column > .btn:hover.active {
 }
 
 #mute > .glyphicon-volume-up {
-  color: #449d44;
+  color: #844352;
 }
 
 #mute > .glyphicon-volume-off {
-  color: #d43f3a;
+  color: #844352;
 }
 
 .thumbnail {
   position: relative;
   padding: 5px 10px;
   margin: 0;
+}
+
+h5,a{
+    color: #844352 ;
+    text-transform: uppercase;
+
 }
 
 .scaling {
