@@ -76,47 +76,97 @@ var addToMailingList = function (email) {
   });
 };
 
-var acceptEmail = {
-  from: 'Snart Gift <martine.nikolai@gmail.com>',
-  to: 'rikardeide@gmail.com',
-  subject: 'Skal vi se',
-  text: 'Jeg prøver å sende meg selv mail!'
+var createPeopleList = function (people) {
+  var list = '';
+
+  // Det vi må gjrøe: For hvert element i listen skriv ut navnet
+  // ettefulgt av paranteer men dagene personen kommer.
+  // Rikard Eide (Lørdag, Søndag) etterfulgt av linjeskift
+
+  return '';
 };
 
-var declineEmail = {
-  from: 'Snart Gift <martine.nikolai@gmail.com>',
-  to: 'rikardeide@gmail.com',
-  subject: 'Skal vi se',
-  text: 'Jeg prøver å sende meg selv mail!'
+
+var getAcceptMail = function (data) {
+
+  //var deltagere = createPeopleList(data.people);
+
+  var body = 'Hei!\nSå hyggelig at du har anledning til å komme!\n' +
+      'Vi har foreløpig registrert følgende informasjon: ' + '\n\n' +
+      "Epost:\t" + data.email + "\nMelding: " + data.msg +
+      "\n\nVennligst bekreft at denne informasjonen stemmer ved å klikke på følgende link:\n" +
+      "http://martineognikolai.dk/confirm/" + data._id;
+
+  var acceptEmail = {
+    from: 'Martine og Nikolai <martine.nikolai@gmail.com>',
+    to: data.email,
+    subject: 'Martine og Nikolai: Vennligst bekreft eposten din',
+    text: body
+  };
+
+  return acceptEmail;
+
 };
 
-var sendConfirmationMail = function (email, value) {
+var getDeclineMail = function (data) {
+  var body = 'Det var leit at du ikke har anledning til å komme. Vennligst bekreft at dette stemmer ved å besøke følgende link:\n' +
+      "http://martineognikolai.dk/confirm/" + data._id;
+
+  var declineEmail = {
+    from: 'Martine og Nikolai <martine.nikolai@gmail.com>',
+    to: data.email,
+    subject: 'Martine og Nikolai: Vennligst bekreft eposten din',
+    text: body
+  };
+
+  return declineEmail;
+};
+
+
+var sendConfirmationMail = function (data, value) {
   var mail = '';
 
   if(value){
+    mail = getAcceptMail(data);
+  }else{
+    mail = getDeclineMail(data);
   }
 
-  mailgun.messages().send(data, function (err, body) {
+  mailgun.messages().send(mail, function (err, body) {
     if (err) {
       console.log("ERROR: couln't send mail! ");
+      console.log(err);
+    }else{
+      console.log("Mail sent:");
+      console.log(body);
     }
-    console.log(body);
+  });
+};
+
+var sendLogMail = function (data) {
+  var body = Date.now + "RSVP registrert:\n" + data;
+
+  var logMail = {
+    from: 'Snart Gift <martineognikolai@mail.martineognikolai.dk>',
+    to: 'rikardeide@gmai.com',
+    subject: 'mnBryllup: RSVP registrert',
+    text: body
+  };
+
+
+  mailgun.messages().send(logMail, function (err, body) {
+    if (err) {
+      console.log("ERROR: couln't send mail! ");
+      console.log(err);
+    }else{
+      console.log("Mail sent:");
+      console.log(body);
+    }
   });
 };
 
 
 // ================ ROUTES ===========
-
-
-// Route to verift email
-app.get('/validate/:mail', function (req, res) {
-  console.log("validating email:");
-  console.log(req.params.mail);
-
-  //TODO: Verify email address.
-
-  res.send("heisann prøvder du å validere?");
-});
 
 
 app.use(session({
@@ -134,6 +184,8 @@ app.use(session({
 }));
 
 app.use(csrf());
+
+
 app.use(function (req, res, next) {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   next();
@@ -141,16 +193,17 @@ app.use(function (req, res, next) {
 
 
 var attendingSchema = new Schema({
-  email           : { type: String, required: true, unique: true},
+  email           : { type: String, required: true},
   people          : { type: [Schema.Types.Mixed], required: true },
-  msg             : { type: Buffer, required: false, trim:true},
+  msg             : { type: String, required: false, trim:true},
   confirmed       : { type: Boolean, required: true, default: false},
   date_created    : { type: Date, required: true, default: Date.now }
 });
 
 var notAttendingSchema = new Schema({
   name       : { type: String, required: true, lowercase: true, trim: true }, //index: { unique: true } might be smurt for avoiding duplicates
-  email        : { type: String, required: true, unique: true},
+  email        : { type: String, required: true},
+  confirmed       : { type: Boolean, required: true, default: false},
   date_created    : { type: Date, required: true, default: Date.now }
 });
 
@@ -176,25 +229,53 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
-// ========= GET =========
+// ========= GET ========
 
+app.get('/confirm/:id', function (req, res) {
 
-app.get('/confirm/:email', function (req, res) {
-  //res.sendFile(__dirname + '/confirmed.html');
-  res.sendFile(__dirname + '/error.html');
+  var id = req.params.id;
 
+  Pending.findOne({_id:id}, function (err, doc) {
+    console.log("Looking in Accepted: " + doc);
+    if(doc == null){
+
+      Declined.findOne({_id:id}, function (err2, doc2) {
+        console.log("Looking in Declined: " + doc2);
+        if(err2 || doc2 == null){
+          res.sendFile(__dirname + '/error.html');
+        }else {
+          doc2.confirmed = true;
+          doc2.save(function (err4) {
+            if(err4) {
+              console.log("Could not save!");
+            }
+          });
+          res.sendFile(__dirname + '/confirmed.html');
+        }
+      });
+    }else{
+
+      console.log("DOC:");
+      console.log(doc);
+      if(err) {
+        res.sendFile(__dirname + '/error.html');
+      }else{
+        doc.confirmed = true;
+        addToMailingList(doc.email);
+        doc.save(function (err) {
+          if(err) {
+            console.log("Could not save!");
+          }
+        });
+        res.sendFile(__dirname + '/confirmed.html');
+      }
+    }
+  });
 });
-
-
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-
-var verifyToken = function (token) {
-  return token == config.authKey;
-};
-
 
 app.use(expressValidator({
   customValidators: {
@@ -268,6 +349,8 @@ app.post('/accept', function (req, res) {
   }else {
     console.log("It checks out!");
 
+    createPeopleList(req.body.people);
+
     res.status(200);
     res.send("Ok");
 
@@ -280,14 +363,16 @@ app.post('/accept', function (req, res) {
     });
 
     newEntity.save(function (err, newEntity) {
-      if (err) return console.error(err);
-      console.log("Saved: " + newEntity);
+      if (err)
+        return console.error(err);
+      else {
+        //console.log("Saved: " + newEntity);
+        sendConfirmationMail(newEntity, true);
+      }
     });
 
     /*--------- Everything ok? Send confirmation email -------*/
 
-    //addToMailingList(req.body.email);
-    //sendConfirmationMail(clean.email);
   }
 
 });
@@ -327,12 +412,31 @@ app.post('/decline', function (req, res) {
     //*---------Database calls -------*!//
 
     newEntity.save(function (err, newEntity) {
-      if (err) return console.error(err);
-      console.log("Saved: " + newEntity);
+      if (err)
+        return console.error(err);
+      else {
+        sendConfirmationMail(newEntity, false);
+      }
     });
-
-    /*--------- Everything ok? Send confirmation email -------*/
-
-    //sendConfirmationMail(req.body, false);
   }
+});
+
+
+app.use(function(req, res, next){
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.sendFile(__dirname + '/error.html');
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
 });

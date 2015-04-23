@@ -124,7 +124,7 @@
                     <h3>Lørdag</h3>
                     <div class="col-sm-6">
                         <h4>Vielse</h4>
-                        <p><b>KLOKKEN</b> 14.00</p>
+                        <p><b>KLOKKEN</b> 13.30</p>
                         <p><b>STED</b> Slotskapellet</p>
                         <h4>Kake og Champagne</h4>
                         <p><b>KLOKKEN</b> 15.00</p>
@@ -239,7 +239,7 @@
 
                 <div class="text-center form-confirmation" ng-if="showSucccess">
                 <h2 ng-if="positive">Takk skal du ha, en epost er på vei for å bekrefte tilbakemeldingen din.
-                    <br/>Vi gleder oss til September!</h2>
+                    Vi gleder oss til September!</h2>
                 <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei for å bekrefte tilbakemeldingen din.</h2>
                     <p><em>- Martine og Nikolai</em></p>
                 </div>
@@ -248,9 +248,10 @@
                     <div class="col-xs-8 col-xs-push-2">
                         <form name="tokenForm" class="form-inline" ng-if="showValidation">
                             <div class="form-group inline">
-                                <label for="tokenField"></label>
-                                <input  autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">
-                                <button type="submit" class="btn btn-selected pull-right" ng-click="testSecret(token)" >Godkjenn</button>
+                                <h1>Svarskjemaet ER IKKE HELT KLART. Kom tilbake i morgen!</h1>
+                                <!--<label for="tokenField"></label>-->
+                                <!--<input  autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">-->
+                                <!--<button type="submit" class="btn btn-selected pull-right" ng-click="testSecret(token)" >Godkjenn</button>-->
                             </div>
                             <p class="errormessage animated fadeInDown">{{validationError}}</p>
                         </form>
