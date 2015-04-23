@@ -9,10 +9,10 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
     .controller('rsvpCtrl', [ '$scope', '$http', '$timeout', '_',
         function ($scope, $http, $timeout, _) {
 
-            $scope.showForm = true;
-            $scope.showValidation = false;
+            $scope.showForm = false;
+            $scope.showValidation = true;
             $scope.participants = {};
-
+            $scope.sent = false;
             $scope.selectA = "";
             $scope.selectB = "";
             $scope.form = {};
@@ -49,7 +49,7 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
 
                 var test = {token: token};
 
-                $http.post('/', test).success(function () {
+                $http.post('/token/', test).success(function () {
                     //console.log("Token accepted");
                     $scope.showForm = true;
                     $scope.token = token;
@@ -66,12 +66,6 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
 
             $scope.submitForm = function (area) {
                 $scope.area = area;
-
-                /*
-                 console.log($scope.area);
-                 console.log($scope.form);
-                 console.log($scope.participants);
-                 */
 
                 $scope.error = false;
 
@@ -121,7 +115,7 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                 }
 
                 if($scope.positive && !$scope.errorEmail && !$scope.errorArea && !$scope.errorDay){ // means that the person is attending
-                    console.log("lets do business");
+                    //console.log("lets do business");
 
                     var payload = {
                         token: $scope.token,
@@ -130,22 +124,21 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                         msg: $scope.area
                     };
 
-                    console.log(payload);
+                    //console.log(payload);
 
-                    $http.post('/', payload).success(function () {
+                    $http.post('/accept/', payload).success(function () {
                         $scope.showForm = false;
                         $scope.showValidation = false;
                         $scope.showSucccess = true;
                     }).error(function (data, status, headers, config) {
-
-                        console.log(status);
-                        if(status == 400){
+                        //console.log(status);
+                        if (status == 400) {
                             $scope.areaError = 'Prøver du å hacke meg? Det er noe galt med feltene, prøv igjen.';
                             $scope.errorArea = true;
-                        }else if(status == 401){
-                            $scope.areaError = data +'. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
+                        } else if (status == 401) {
+                            $scope.areaError = data + '. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
                             $scope.errorArea = true;
-                        }else{
+                        } else {
                             $scope.areaError = 'Feil på serveren. Send innholdet i feltet over på epost til martine.nikolai@gmail.com';
                             $scope.errorArea = true;
                             $scope.area = JSON.stringify(payload.email) + JSON.stringify(_.flatten(payload.people)) + JSON.stringify(payload.msg);
@@ -154,20 +147,19 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
 
 
                 }else if($scope.negative && !$scope.errorName && !$scope.errorEmail) { // means that the person is not attending
-                    console.log("Someone is not showing up...");
+                    //console.log("Someone is not showing up...");
 
                     var payload = {
                         token: $scope.token,
                         email: $scope.form.email,
                         name: $scope.form.name
                     };
-
-                    $http.post('/', payload).success(function () {
+                    $http.post('/decline/', payload).success(function () {
                         $scope.showForm = false;
                         $scope.showValidation = false;
                         $scope.showSucccess = true;
                     }).error(function (data, status, headers, config) {
-                        console.log(status);
+                        //console.log(status);
                         if(status == 400){
                             $scope.emailError = 'Prøver du å hacke meg? Det er noe galt med feltene, prøv igjen.';
                             $scope.errorEmail = true;
