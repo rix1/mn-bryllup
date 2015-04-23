@@ -437,7 +437,7 @@ app.post('/accept', function (req, res) {
       else {
         sendConfirmationMail(newEntity, true);
         if(!debug) {
-          sendLogMail(data);
+          sendLogMail(newEntity);
         }
       }
     });
@@ -491,7 +491,7 @@ app.post('/decline', function (req, res) {
       else {
         sendConfirmationMail(newEntity, false);
         if(!debug) {
-          sendLogMail(data);
+          sendLogMail(newEntity);
         }
       }
     });
