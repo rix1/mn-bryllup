@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var debug = true;
+var debug = false;
 //var config = require('./lib/config'); //config.js file with hard-coded options.
 
 // In production
@@ -283,7 +283,11 @@ db.once('open', function (callback) {
   console.log("Database connection established");
 });
 
-app.set('port', 3000);
+if(debug){
+  app.set('port', 3000);
+}else{
+  app.set('port', 8880);
+}
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
