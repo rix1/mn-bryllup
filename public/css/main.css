@@ -6,6 +6,9 @@ body {
   background-color: #f2f2f2;
   color: #364252;
 }
+.help {
+  color: #666766;
+}
 @font-face {
   font-family: 'Jacques';
   src: url('/fonts/JacquesGilles.otf');

@@ -55,8 +55,13 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                     $scope.token = token;
                     $scope.validationError = '';
                     $scope.showValidation = false;
-                }).error(function () {
-                    $scope.error = "Feil kode dessverre";
+                }).error(function (data, status, headers, config) {
+
+                    if (status == 403) {
+                        $scope.validationError = 'Wops, her gikk noe galt. Last inn siden på nytt';
+                    }else {
+                        $scope.validationError = "Feil kode dessverre";
+                    }
                     $timeout(function() {
                         $scope.validationError = "";
                     }, 3000);
@@ -65,6 +70,8 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
 
 
             $scope.submitForm = function (area) {
+
+
                 $scope.area = area;
 
                 $scope.error = false;
@@ -121,7 +128,8 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                         token: $scope.token,
                         email: $scope.form.email,
                         people: $scope.participants,
-                        msg: $scope.area
+                        msg: $scope.area,
+                        hotel: $scope.form.hotel
                     };
 
                     //console.log(payload);
@@ -133,15 +141,18 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                     }).error(function (data, status, headers, config) {
                         //console.log(status);
                         if (status == 400) {
-                            $scope.areaError = 'Prøver du å hacke meg? Det er noe galt med feltene, prøv igjen.';
+                            $scope.areaError = 'What? Det er noe galt med feltene. Prøv igjen.';
                             $scope.errorArea = true;
                         } else if (status == 401) {
                             $scope.areaError = data + '. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
                             $scope.errorArea = true;
-                        } else {
-                            $scope.areaError = 'Feil på serveren. Send innholdet i feltet over på epost til martine.nikolai@gmail.com';
+                        } else if (status == 403) {
+                            $scope.areaError = 'Wops, her gikk noe feil. Last inn siden på nytt';
                             $scope.errorArea = true;
-                            $scope.area = JSON.stringify(payload.email) + JSON.stringify(_.flatten(payload.people)) + JSON.stringify(payload.msg);
+                        } else {
+                            $scope.areaError = 'Feil på serveren. Last inn siden på nytt. Hvis problemet vedvarer, send en mail til martine.nikolai@gmail.com';
+                            //$scope.errorArea = true;
+                            //$scope.area = JSON.stringify(payload.email) + JSON.stringify(_.flatten(payload.people)) + JSON.stringify(payload.msg);
                         }
                     });
 
@@ -165,6 +176,9 @@ angular.module('mnApp', ['ngTagsInput', 'underscore'])
                             $scope.errorEmail = true;
                         }else if(status == 401){
                             $scope.emailError = data +'. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';
+                            $scope.errorEmail = true;
+                        }else if (status == 403) {
+                            $scope.emailError = 'Wops, her gikk noe feil. Last inn siden på nytt';
                             $scope.errorEmail = true;
                         }else{
                             $scope.emailError = 'Feil på serveren. Hvis problemet vedvarer, send epost til martine.nikolai@gmail.com ';

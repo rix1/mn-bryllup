@@ -50,7 +50,8 @@ var list = mailgun.lists('guest@mail.martineognikolai.dk');
 
 var getMailListMembers = function () {
 
-  /* List emails in guest list
+  /*
+   List emails in guest list
    list.info(function (err, data) {
    // `data` is mailing list info
    console.log(data);
@@ -58,44 +59,106 @@ var getMailListMembers = function () {
    */
 
   list.members().list(function (err, members) {
+    //console.log(members.items);
 
   });
 };
 
 var addToMailingList = function (email) {
-  var member = [{
-    address: email
-  }];
-  list.members().add({members: member, subscribed: true}, function (err, body) {
-    console.log(body);
-    if(err) {
-      // Log error
-    } else{
-      console.log("Email added to list");
-    }
-  });
-};
+
+      var member = [{
+        address: email
+      }];
+
+      var alreadyInList;
+
+      // Test if member is already there:
+      list.members().list(function (err, members) {
+        alreadyInList = _.some(members.items, function (item) {
+          return item.address == 'rikardeide@gmail.com'
+        });
+      });
+
+      if(alreadyInList){
+        console.log("Email already exist in list");
+      }else{
+        list.members().add({members: member, subscribed: true}, function (err, body) {
+          //console.log(body);
+          if(err) {
+            // Log error
+          } else{
+            console.log("Email added to list");
+          }
+        });
+      }}
+    ;
 
 var createPeopleList = function (people) {
   var list = '';
 
-  // Det vi må gjrøe: For hvert element i listen skriv ut navnet
-  // ettefulgt av paranteer men dagene personen kommer.
-  // Rikard Eide (Lørdag, Søndag) etterfulgt av linjeskift
+  //console.log(people);
 
-  return '';
+  for(i in people){
+    if(people[i].participate) {
+      list += " – " + people[i].text + " deltar på ";
+
+      var s = people[i].participate;
+
+      var array = [];
+      var counter = 0;
+
+      if(s.fri) {
+        array[counter] = "fredag";
+        counter ++;
+      }
+      if(s.sat){
+        array[counter] = "lørdag";
+        counter ++;
+      }
+      if(s.sun) {
+        array[counter] = "søndag";
+      }
+
+      for(i in array){
+        if(i == 0){
+          list += array[i];
+
+          if(array.length == 3) list += ', ';
+          if(array.length == 2) list += ' og ';
+        }if(i == 1){
+          list += array[i];
+          if(array.length > 2) list += " og ";
+        }if(i == 2){
+          list += array[i];
+        }
+      }
+      list += ".\n";
+    }
+  }
+  return list;
 };
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 var getAcceptMail = function (data) {
 
-  //var deltagere = createPeopleList(data.people);
+  var deltagere = createPeopleList(data.people);
+  var hotelInfo = "";
+  if(data.hotel){
+    hotelInfo = "Du krysset av at du/dere ønsker å bo på Hotel Hesselet. Vi kommer til å kontakte dere på epost med nærmere detaljer innen kort tid.\n"
+  }
 
-  var body = 'Hei!\nSå hyggelig at du har anledning til å komme!\n' +
+  var body = 'Hei!\nSå hyggelig at du har anledning til å komme i vårt danske bryllup!\n' +
       'Vi har foreløpig registrert følgende informasjon: ' + '\n\n' +
-      "Epost:\t" + data.email + "\nMelding: " + data.msg +
-      "\n\nVennligst bekreft at denne informasjonen stemmer ved å klikke på følgende link:\n" +
-      "http://martineognikolai.dk/confirm/" + data._id;
+      "Epost:\t" + data.email+
+      "\nDeltagere:\n" + deltagere +
+      "Melding: " + data.msg +
+      "\n\nVennligst bekreft at denne informasjonen stemmer ved å klikke på følgende link:\n\n" +
+      "http://martineognikolai.dk/confirm/" + data._id +
+      "\n\n" + hotelInfo + "For øvrig informasjon, følg med på nettsiden, eller send oss en mail på martine.nikolai@gmail.com =)" +
+      "\n\nMed vennlig hilsen,\nMartine og Nikolai";
 
   var acceptEmail = {
     from: 'Martine og Nikolai <martine.nikolai@gmail.com>',
@@ -109,8 +172,9 @@ var getAcceptMail = function (data) {
 };
 
 var getDeclineMail = function (data) {
-  var body = 'Det var leit at du ikke har anledning til å komme. Vennligst bekreft at dette stemmer ved å besøke følgende link:\n' +
-      "http://martineognikolai.dk/confirm/" + data._id;
+  var body = 'Hei ' + capitalizeFirstLetter(data.name.split(" ")[0]) + '!\nDet var leit at du ikke har anledning til å komme i bryllupet vårt. Vennligst bekreft at dette stemmer ved å besøke følgende link:\n\n' +
+      "http://martineognikolai.dk/confirm/" + data._id +
+      "\n\nMed vennlig hilsen,\nMartine og Nikolai";
 
   var declineEmail = {
     from: 'Martine og Nikolai <martine.nikolai@gmail.com>',
@@ -160,7 +224,7 @@ var sendLogMail = function (data) {
       console.log(err);
     }else{
       console.log("Mail sent:");
-      console.log(body);
+      //console.log(body);
     }
   });
 };
@@ -196,6 +260,7 @@ var attendingSchema = new Schema({
   email           : { type: String, required: true},
   people          : { type: [Schema.Types.Mixed], required: true },
   msg             : { type: String, required: false, trim:true},
+  hotel           : { type: Boolean, required: false, default: false},
   confirmed       : { type: Boolean, required: true, default: false},
   date_created    : { type: Date, required: true, default: Date.now }
 });
@@ -207,7 +272,7 @@ var notAttendingSchema = new Schema({
   date_created    : { type: Date, required: true, default: Date.now }
 });
 
-var Accepted = mongoose.model('Accepted', attendingSchema, 'rsvp_accepted');
+//var Accepted = mongoose.model('Accepted', attendingSchema, 'rsvp_accepted');
 var Pending = mongoose.model('Pending', attendingSchema, 'rsvp_pending');
 var Declined = mongoose.model('Declined', notAttendingSchema, 'rsvp_declined');
 
@@ -250,11 +315,10 @@ app.get('/confirm/:id', function (req, res) {
               console.log("Could not save!");
             }
           });
-          res.sendFile(__dirname + '/confirmed.html');
+          res.sendFile(__dirname + '/confirmDeclined.html');
         }
       });
     }else{
-
       console.log("DOC:");
       console.log(doc);
       if(err) {
@@ -340,16 +404,16 @@ app.post('/accept', function (req, res) {
   req.assert('people', 'People is required').notEmpty();
   req.assert('people', 'People is not valid').hasPeople();
 
+  req.sanitize('hotel', 'Hotel field is either true or false').toBoolean();
+
   var errors = req.validationErrors();
 
   if(errors){
-    console.log("WOPS!");
+    console.log("WOPS! " + JSON.stringify(errors));
     res.status(400);
     res.send(errors);
   }else {
     console.log("It checks out!");
-
-    createPeopleList(req.body.people);
 
     res.status(200);
     res.send("Ok");
@@ -359,15 +423,18 @@ app.post('/accept', function (req, res) {
     var newEntity = new Pending({
       email:  req.body.email,
       people: req.body.people,
-      msg:    req.body.msg
+      msg:    req.body.msg,
+      hotel:  req.body.hotel
     });
 
     newEntity.save(function (err, newEntity) {
       if (err)
         return console.error(err);
       else {
-        //console.log("Saved: " + newEntity);
         sendConfirmationMail(newEntity, true);
+        if(!debug) {
+          sendLogMail(data);
+        }
       }
     });
 
@@ -379,6 +446,9 @@ app.post('/accept', function (req, res) {
 
 
 app.post('/decline', function (req, res) {
+  getMailListMembers();
+
+
   console.log("Someone tries to RSVP");
   var inn = req.body;
   console.log(inn);
@@ -416,9 +486,21 @@ app.post('/decline', function (req, res) {
         return console.error(err);
       else {
         sendConfirmationMail(newEntity, false);
+        if(!debug) {
+          sendLogMail(data);
+        }
       }
     });
   }
+});
+
+app.use(function (err, req, res, next) {
+  if (err.code !== 'EBADCSRFTOKEN') return next(err);
+
+  console.log("CSRF ERROR!");
+  // handle CSRF token errors here
+  res.status(403);
+  res.send('form tampered with')
 });
 
 

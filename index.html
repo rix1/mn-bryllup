@@ -238,20 +238,20 @@
                 </div>
 
                 <div class="text-center form-confirmation" ng-if="showSucccess">
-                <h2 ng-if="positive">Takk skal du ha, en epost er på vei for å bekrefte tilbakemeldingen din.
-                    Vi gleder oss til September!</h2>
-                <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei for å bekrefte tilbakemeldingen din.</h2>
+                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei for å bekrefte tilbakemeldingen din.
+                        Vi gleder oss til September!</h2>
+                    <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei for å bekrefte tilbakemeldingen din.</h2>
                     <p><em>- Martine og Nikolai</em></p>
                 </div>
 
                 <div class="row text-center">
-                    <div class="col-xs-8 col-xs-push-2">
+                    <div class="col-xs-6 col-xs-push-3">
                         <form name="tokenForm" class="form-inline" ng-if="showValidation">
                             <div class="form-group inline">
-                                <h1>Svarskjemaet ER IKKE HELT KLART. Kom tilbake i morgen!</h1>
-                                <!--<label for="tokenField"></label>-->
-                                <!--<input  autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">-->
-                                <!--<button type="submit" class="btn btn-selected pull-right" ng-click="testSecret(token)" >Godkjenn</button>-->
+                                <!--<h1>Svarskjemaet ER IKKE HELT KLART. Kom tilbake i morgen!</h1>-->
+                                <label for="tokenField"></label>
+                                    <input autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Koden fra invitasjonen..." ng-model="token">
+                                <button type="submit" class="btn btn-selected" ng-click="testSecret(token)" >Godkjenn</button>
                             </div>
                             <p class="errormessage animated fadeInDown">{{validationError}}</p>
                         </form>
@@ -262,7 +262,7 @@
                     <div class="col-lg-8 col-lg-offset-2 animated fadeIn" ng-if="showForm">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                        <p>Vennligst velg det som passer deg eller dere:</p>
+                        <p class="help">Vennligst velg det som passer deg eller dere:</p>
                         <div class="col-xs-12 selectButtons">
                             <button type="button" ng-click="selected('a')" class="btn btn-select {{selectA}}">En eller flere kan komme</button>
                             <button type="button" ng-click="selected('b')" class="btn  btn-select {{selectB}}">Kan dessverre ikke komme</button>
@@ -277,13 +277,13 @@
                                 <div class="form-group col-xs-8 col-xs-push-2 floating-label-form-group controls" ng-show="negative">
                                     <!--<label>Email Address</label>-->
                                     <input ng-maxlength="40" auto-complete="off" type="text" id="name" class="form-control" name="name" placeholder="Navn" ng-model="form.name" >
-                                    <p style="font-size: 1em" ng-if="errorName" class="help-block text-danger red animated fadeIn">{{nameError}}</p>
+                                    <p style="font-size: 1em" ng-if="errorName" class="help-block text-danger red animated shake">{{nameError}}</p>
                                 </div>
 
                                 <div class="form-group col-xs-8 col-xs-push-2 floating-label-form-group controls" ng-show="positive || negative">
                                     <!--<label>Email Address</label>-->
                                     <input ng-maxlength="40" auto-complete="off" type="email" id="email2" name="email1" class="form-control" placeholder="E-post" ng-model="form.email" >
-                                    <p style="font-size: 1em" ng-if="errorEmail" class="help-block text-danger red animated fadeIn">{{emailError}}</p>
+                                    <p style="font-size: 1em" ng-if="errorEmail" class="help-block text-danger red animated shake">{{emailError}}</p>
                                 </div>
 
 
@@ -297,7 +297,7 @@
                                         <p style="font-size: 1em; margin-top: -15px">Skill navn med komma.</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 1em" ng-if="errorPart" class="help-block text-danger red animated fadeIn">{{partError}}</p>
+                                <p style="font-size: 1em" ng-if="errorPart" class="help-block text-danger red animated shake">{{partError}}</p>
 
 
                                 <div class="row">
@@ -310,19 +310,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p style="font-size: 1em" ng-if="errorDay" class="help-block text-danger red animated fadeIn">{{dayError}}</p>
+                                <p style="font-size: 1em" ng-if="errorDay" class="help-block text-danger red animated shake">{{dayError}}</p>
 
                                 <div class="row control-group">
-                                    <p>Har du noe vi bør vite om (matallergier, spørsmål eller annet)?</p>
+                                    <p class="help">Har du noe vi bør vite om (matallergier, spørsmål eller annet)?</p>
                                     <div class="form-group col-xs-12 floating-label-form-group controls">
                                         <!--<label>Message</label>-->
                                         <div class="textArea">
-                                            <textarea ng-model="$parent.area" rows="5" name="message" class="form-control" placeholder="Message" id="message"></textarea>
+                                            <textarea ng-model="$parent.area" rows="5" name="message" class="form-control" placeholder="Melding..." id="message"></textarea>
                                         </div>
-                                        <p style="font-size: 1em; margin-top: -15px">Maks 500 tegn</p>
-                                        <p style="font-size: 1em" ng-if="errorArea" class="help-block text-danger red animated fadeIn">{{areaError}}</p>
-
+                                        <p style="font-size: 1em; margin-top: -15px">{{area.length}}/500 tegn</p>
+                                        <p style="font-size: 1em" ng-if="errorArea" class="help-block text-danger red animated shake">{{areaError}}</p>
                                     </div>
+                                    <div><label><input ng-model="form.hotel" class="checker" type="checkbox" id="">Jeg/vi ønsker rom på Hotel Hesselet.
+                                        <br/> <small>Spesifiser romdetaljer etc. i feltet over</small></label></div>
+
                                 </div>
                             </div>
                             <div id="success"></div>
@@ -354,7 +356,7 @@
                 </div>
                 <div class="footer-col col-md-4 hidden-sm hidden-xs">
                     <h3>Kontakt</h3>
-                    <p>Tlf: 92015797 <br/> martine.nikolai@gmail.com</p>
+                    <p>Tlf: 92015797 <br/> <a style="color: #F2F2F2; text-transform: lowercase" href="mailto:martine.nikolai@gmail.com">martine.nikolai@gmail.com</a></p>
                 </div>
             </div>
         </div>
