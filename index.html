@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Martine og Nikolai</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
@@ -238,9 +239,9 @@
                 </div>
 
                 <div class="text-center form-confirmation" ng-if="showSucccess">
-                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei for å bekrefte tilbakemeldingen din.
+                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei til {{form.email}} for å bekrefte tilbakemeldingen din.
                         Vi gleder oss til September!</h2>
-                    <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei for å bekrefte tilbakemeldingen din.</h2>
+                    <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei til {{form.email}} for å bekrefte tilbakemeldingen din.</h2>
                     <p><em>- Martine og Nikolai</em></p>
                 </div>
 
