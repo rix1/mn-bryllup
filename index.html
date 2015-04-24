@@ -111,7 +111,7 @@
                 <h2>Bryllupshelgen</h2>
                 <div class="leaf-red"></div>
                 <div class="col-sm-4">
-                    <h3>Fredag</h3>
+                    <h3 class="red">Fredag</h3>
                     <div class="col-sm-12">
                         <h4>Velkomstdrink</h4>
                         <p><b>KLOKKEN</b> 18.30</p>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <h3>Lørdag</h3>
+                    <h3 class="red">Lørdag</h3>
                     <div class="col-sm-6">
                         <h4>Vielse</h4>
                         <p><b>KLOKKEN</b> 13.30</p>
@@ -142,7 +142,7 @@
 
                 </div>
                 <div class="col-sm-4">
-                    <h3>Søndag</h3>
+                    <h3 class="red">Søndag</h3>
                     <div class="col-sm-12">
                         <h4>Felles frokost</h4>
                         <p><b>KLOKKEN</b> 10.00</p>
@@ -239,7 +239,7 @@
                 </div>
 
                 <div class="text-center form-confirmation" ng-if="showSucccess">
-                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei til {{form.email}} for å bekrefte tilbakemeldingen din.
+                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei til <span class="red">{{form.email}}</span> for å bekrefte tilbakemeldingen din.
                         Vi gleder oss til September!</h2>
                     <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei til {{form.email}} for å bekrefte tilbakemeldingen din.</h2>
                     <p><em>- Martine og Nikolai</em></p>
@@ -320,7 +320,7 @@
                                         <div class="textArea">
                                             <textarea ng-model="$parent.area" rows="5" name="message" class="form-control" placeholder="Melding..." id="message"></textarea>
                                         </div>
-                                        <p style="font-size: 1em; margin-top: -15px">{{area.length}}/500 tegn</p>
+                                        <p ng-class="{red: area.length > 500}" style="font-size: 1em; margin-top: -15px">{{area.length}}/500 tegn</p>
                                         <p style="font-size: 1em" ng-if="errorArea" class="help-block text-danger red animated shake">{{areaError}}</p>
                                     </div>
                                     <div><label><input ng-model="form.hotel" class="checker" type="checkbox" id="">Jeg/vi ønsker rom på Hotel Hesselet.

@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var debug = false;
+var debug = true;
 //var config = require('./lib/config'); //config.js file with hard-coded options.
 
 // In production
@@ -100,7 +100,7 @@ var createPeopleList = function (people) {
 
   for(i in people){
     if(people[i].participate) {
-      list += " – " + people[i].text + " deltar på ";
+      list += " – " + capitalizeFirstLetter(people[i].text) + " deltar på ";
 
       var s = people[i].participate;
 
@@ -150,15 +150,16 @@ var getAcceptMail = function (data) {
     hotelInfo = "Du krysset av at du/dere ønsker å bo på Hotel Hesselet. Vi kommer til å kontakte dere på epost med nærmere detaljer innen kort tid.\n"
   }
 
-  var body = 'Hei!\nSå hyggelig at du har anledning til å komme i vårt danske bryllup!\n' +
+  var body = 'Hei!\nSå hyggelig at du har anledning til å komme i vårt bryllup!\n' +
       'Vi har foreløpig registrert følgende informasjon: ' + '\n\n' +
       "Epost:\t" + data.email+
       "\nDeltagere:\n" + deltagere +
       "Melding: " + data.msg +
       "\n\nVennligst bekreft at denne informasjonen stemmer ved å klikke på følgende link:\n\n" +
       "http://martineognikolai.dk/confirm/" + data._id +
-      "\n\n" + hotelInfo + "For øvrig informasjon, følg med på nettsiden, eller send oss en mail på martine.nikolai@gmail.com =)" +
-      "\n\nMed vennlig hilsen,\nMartine og Nikolai";
+      "\n\n" + hotelInfo + "For øvrig informasjon, følg med på nettsiden, der mer informasjon vil bli lagt ut etterhvert. Ellers er det selvfølgelig også bare å ta kontakt med oss på telefon eller mail  martine.nikolai@gmail.com =)" +
+      "\n\n Velkommen i september, vi gleder oss til å se dere!" +
+      "\n\nKlem fra Martine og Nikolai";
 
   var acceptEmail = {
     from: 'Martine og Nikolai <martine.nikolai@gmail.com>',
@@ -213,7 +214,7 @@ var sendLogMail = function (data) {
   var logMail = {
     from: 'Snart Gift <martineognikolai@mail.martineognikolai.dk>',
     to: 'rikardeide@gmai.com',
-    subject: 'mnBryllup: RSVP registrert',
+    subject: 'mnBryllup: RSVP mottatt',
     text: body
   };
 
@@ -436,9 +437,7 @@ app.post('/accept', function (req, res) {
         return console.error(err);
       else {
         sendConfirmationMail(newEntity, true);
-        if(!debug) {
-          sendLogMail(newEntity);
-        }
+        sendLogMail(newEntity);
       }
     });
 
@@ -490,9 +489,7 @@ app.post('/decline', function (req, res) {
         return console.error(err);
       else {
         sendConfirmationMail(newEntity, false);
-        if(!debug) {
-          sendLogMail(newEntity);
-        }
+        sendLogMail(newEntity);
       }
     });
   }
