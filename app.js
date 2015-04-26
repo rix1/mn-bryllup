@@ -352,13 +352,13 @@ app.get('/report/:format', function (req, res) {
         saveFile(verbal, 'verbal.txt');
         //console.log(verbal);
         sendReport(verbal);
-        res.send('As you wish master Wayne, a report has been generated.');
+        res.send('As you wish master Wayne, a text report has been generated.');
 
       } else if(format == 'json') {
         var attendants = JSON.stringify(collection);
         saveFile(attendants, 'attendants.json');
         sendReport(attendants);
-        res.send('As you wish master Wayne, a report has been generated.');
+        res.send('As you wish master Wayne, a JOSN report has been generated.');
 
       } else{
         res.sendFile(__dirname + '/error.html');
@@ -391,7 +391,7 @@ var sendReport = function (report) {
 // ========= POST =========
 
 app.post('/token', function (req, res) {
-  console.log("Someone tries to RSVP");
+  console.log(Date.now() + " - someone tries to TOKEN");
   var inn = req.body;
   console.log(inn);
 
@@ -412,7 +412,7 @@ app.post('/token', function (req, res) {
 });
 
 app.post('/accept', function (req, res) {
-  console.log("Someone tries to RSVP");
+  console.log(Date.now() + " - someone tries to RSVP_ACCEPT");
   var inn = req.body;
   console.log(inn);
 
@@ -470,7 +470,7 @@ app.post('/decline', function (req, res) {
   getMailListMembers();
 
 
-  console.log("Someone tries to RSVP");
+  console.log(Date.now() + " - someone tries to RSVP_DECLINE");
   var inn = req.body;
   console.log(inn);
 
