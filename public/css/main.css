@@ -431,6 +431,9 @@ form .row:first-child .floating-label-form-group {
 .red {
   color: #844352;
 }
+.res-text-md {
+  font-size: 5vw;
+}
 .form-confirmation h2 {
   font-size: 3vmax;
   font-family: 'Lato';

@@ -121,7 +121,7 @@ var getSerializedDetails = function (data) {
   var hotel = (data.hotel) ? 'Ja' : 'Nei';
 
   var string = "Epost:\t\t" + data.email+
-      "\nHotel?:\t\t" + hotel +
+      "\nHotel:\t\t" + hotel +
       "\nDeltagere:\n" + deltagere +
       "Melding:\n" + data.msg;
 
@@ -130,7 +130,6 @@ var getSerializedDetails = function (data) {
 
 var getAcceptMail = function (data) {
 
-  var deltagere = createPeopleList(data.people);
   var hotelInfo = "";
   if(data.hotel){
     hotelInfo = "Du krysset av at du/dere ønsker å bo på Hotel Hesselet. Vi kommer til å kontakte dere på epost med nærmere detaljer innen kort tid.\n"
@@ -138,9 +137,7 @@ var getAcceptMail = function (data) {
 
   var body = 'Hei!\nSå hyggelig at du har anledning til å komme i vårt bryllup!\n' +
       'Vi har foreløpig registrert følgende informasjon: ' + '\n\n' +
-      "Epost:\t" + data.email+
-      "\nDeltagere:\n" + deltagere +
-      "Melding: " + data.msg +
+      getSerializedDetails(data) +
       "\n\nVennligst bekreft at denne informasjonen stemmer ved å klikke på følgende link:\n\n" +
       "http://martineognikolai.dk/confirm/" + data._id +
       "\n\n" + hotelInfo + "For øvrig informasjon, følg med på nettsiden, der mer informasjon vil bli lagt ut etterhvert. Ellers er det selvfølgelig også bare å ta kontakt med oss på telefon eller mail  martine.nikolai@gmail.com =)" +
@@ -336,59 +333,59 @@ var saveFile = function(content, fileName){
   });
 };
 
-app.get('/report', function (req, res) {
+app.get('/report/:format', function (req, res) {
   Pending.find().lean().exec(function (err, collection) {
     if(err || collection == null){
       res.send('Well this is embarrassing.');
     }else {
 
-      var attendants = JSON.stringify(collection);
-      var sendMail = true;
-      var verbal = '';
+      var format = req.params.format;
+      var report = '';
+      console.log(format);
 
-      _.each(collection, function (data) {
-        verbal += getSerializedDetails(data);
-        verbal += '\n\n---\n\n';
-      });
-
-      saveFile(verbal, 'verbal.txt');
-      saveFile(attendants, 'attendants.json');
-
-      var filename = 'attendants.json';
-      var file ='';
-
-      fs.readFile(__dirname +'/tmp/attendants.json', 'utf8', function (err,data) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log(data);
-        file = data;
-      });
-
-      res.send('As you wish master Wayne, a report has been generated.');
-
-      var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-
-      var logMail = {
-        from: 'MN Bryllup <martineognikolai@mail.martineognikolai.dk>',
-        to: config.email_me,
-        subject: 'RSVP report: ' + date,
-        text: 'Se vedlagt rapport: \n\n' + attendants
-      };
-
-      if(sendMail){
-        mailgun.messages().send(logMail, function (err, body) {
-          if (err) {
-            console.log("ERROR: couln't send mail! ");
-            console.log(err);
-          } else {
-            console.log("Mail sent:");
-          }
+      if(format == 'txt') {
+        var verbal = '';
+        _.each(collection, function (data) {
+          verbal += getSerializedDetails(data);
+          verbal += '\n\n---\n\n';
         });
+        saveFile(verbal, 'verbal.txt');
+        //console.log(verbal);
+        sendReport(verbal);
+        res.send('As you wish master Wayne, a report has been generated.');
+
+      } else if(format == 'json') {
+        var attendants = JSON.stringify(collection);
+        saveFile(attendants, 'attendants.json');
+        sendReport(attendants);
+        res.send('As you wish master Wayne, a report has been generated.');
+
+      } else{
+        res.sendFile(__dirname + '/error.html');
       }
     }
   });
 });
+
+var sendReport = function (report) {
+  var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
+  var logMail = {
+    from: 'MN Bryllup <martineognikolai@mail.martineognikolai.dk>',
+    to: config.email_me,
+    subject: 'RSVP report: ' + date,
+    text: 'Se vedlagt rapport: \n\n' + report
+  };
+
+  mailgun.messages().send(logMail, function (err, body) {
+    if (err) {
+      console.log("ERROR: couln't send mail! ");
+      console.log(err);
+    } else {
+      console.log("Mail sent:");
+    }
+  });
+};
 
 
 // ========= POST =========
