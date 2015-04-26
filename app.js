@@ -9,26 +9,14 @@ var csrf = require('csurf');
 var expressValidator = require('express-validator');
 var helmet = require('helmet');
 var _ = require('underscore');
+var fs = require('fs');
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var debug = true;
-//var config = require('./lib/config'); //config.js file with hard-coded options.
+var config = require('./extra/config'); //config.js file with hard-coded options.
 
-// In production
-if(!debug){
-  mongoose.connect('mongodb://nodeUser:JgKwWLVBYUy2RA8pKRYTg9rN7idRcbYnaGph2Ur@localhost:27314/rsvp')
-}else{
-  mongoose.connect('mongodb://localhost/bryllup');
-}
-
-
-var config = {};
-config.cookieSecret = "6L2pmgZ4QiRTVyhTVaerWT7Z9qUN";
-config.authKey = "r4Ket-s4kzR";
-config.mg_api_key = "key-609fe452374be0986a6acec3d32cccc2";
-config.mg_domain = "mail.martineognikolai.dk";
+mongoose.connect(config.mongoDB);
 
 app.use(helmet());
 app.use(cookieParser(config.cookieSecret, { httpOnly: true }));
@@ -37,16 +25,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator([]));
 
 
-
 // ================ MAIL ===========
-
 
 var mailgun = require('mailgun-js')({
   apiKey: config.mg_api_key,
   domain: config.mg_domain
 });
 
-var list = mailgun.lists('guest@mail.martineognikolai.dk');
+var list = mailgun.lists(config.mailingList);
 
 var getMailListMembers = function () {
 
@@ -66,32 +52,20 @@ var getMailListMembers = function () {
 
 var addToMailingList = function (email) {
 
-      var member = [{
-        address: email
-      }];
+  var member = [{
+    address: email
+  }];
 
-      var alreadyInList;
 
-      // Test if member is already there:
-      list.members().list(function (err, members) {
-        alreadyInList = _.some(members.items, function (item) {
-          return item.address == 'rikardeide@gmail.com'
-        });
-      });
-
-      if(alreadyInList){
-        console.log("Email already exist in list");
-      }else{
-        list.members().add({members: member, subscribed: true}, function (err, body) {
-          //console.log(body);
-          if(err) {
-            // Log error
-          } else{
-            console.log("Email added to list");
-          }
-        });
-      }}
-    ;
+  list.members().add({members: member, subscribed: true}, function (err, body) {
+    //console.log(body);
+    if(err) {
+      console.log("Could not add to list");
+    } else{
+      console.log("Email added to list");
+    }
+  });
+};
 
 var createPeopleList = function (people) {
   var list = '';
@@ -141,6 +115,18 @@ var createPeopleList = function (people) {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+var getSerializedDetails = function (data) {
+  var deltagere = createPeopleList(data.people);
+  var hotel = (data.hotel) ? 'Ja' : 'Nei';
+
+  var string = "Epost:\t\t" + data.email+
+      "\nHotel?:\t\t" + hotel +
+      "\nDeltagere:\n" + deltagere +
+      "Melding:\n" + data.msg;
+
+  return string;
+};
 
 var getAcceptMail = function (data) {
 
@@ -208,28 +194,6 @@ var sendConfirmationMail = function (data, value) {
   });
 };
 
-var sendLogMail = function (data) {
-  var body = Date.now + "RSVP registrert:\n" + data;
-
-  var logMail = {
-    from: 'Snart Gift <martineognikolai@mail.martineognikolai.dk>',
-    to: 'rikardeide@gmai.com',
-    subject: 'mnBryllup: RSVP mottatt',
-    text: body
-  };
-
-
-  mailgun.messages().send(logMail, function (err, body) {
-    if (err) {
-      console.log("ERROR: couln't send mail! ");
-      console.log(err);
-    }else{
-      console.log("Mail sent:");
-      //console.log(body);
-    }
-  });
-};
-
 
 // ================ ROUTES ===========
 
@@ -273,7 +237,6 @@ var notAttendingSchema = new Schema({
   date_created    : { type: Date, required: true, default: Date.now }
 });
 
-//var Accepted = mongoose.model('Accepted', attendingSchema, 'rsvp_accepted');
 var Pending = mongoose.model('Pending', attendingSchema, 'rsvp_pending');
 var Declined = mongoose.model('Declined', notAttendingSchema, 'rsvp_declined');
 
@@ -284,11 +247,7 @@ db.once('open', function (callback) {
   console.log("Database connection established");
 });
 
-if(debug){
-  app.set('port', 3000);
-}else{
-  app.set('port', 8880);
-}
+app.set('port', config.port);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
@@ -368,6 +327,69 @@ app.use(expressValidator({
   }
 }));
 
+var saveFile = function(content, fileName){
+  fs.writeFile(__dirname + '/tmp/'+ fileName, content, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  });
+};
+
+app.get('/report', function (req, res) {
+  Pending.find().lean().exec(function (err, collection) {
+    if(err || collection == null){
+      res.send('Well this is embarrassing.');
+    }else {
+
+      var attendants = JSON.stringify(collection);
+      var sendMail = true;
+      var verbal = '';
+
+      _.each(collection, function (data) {
+        verbal += getSerializedDetails(data);
+        verbal += '\n\n---\n\n';
+      });
+
+      saveFile(verbal, 'verbal.txt');
+      saveFile(attendants, 'attendants.json');
+
+      var filename = 'attendants.json';
+      var file ='';
+
+      fs.readFile(__dirname +'/tmp/attendants.json', 'utf8', function (err,data) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log(data);
+        file = data;
+      });
+
+      res.send('As you wish master Wayne, a report has been generated.');
+
+      var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
+      var logMail = {
+        from: 'MN Bryllup <martineognikolai@mail.martineognikolai.dk>',
+        to: config.email_me,
+        subject: 'RSVP report: ' + date,
+        text: 'Se vedlagt rapport: \n\n' + attendants
+      };
+
+      if(sendMail){
+        mailgun.messages().send(logMail, function (err, body) {
+          if (err) {
+            console.log("ERROR: couln't send mail! ");
+            console.log(err);
+          } else {
+            console.log("Mail sent:");
+          }
+        });
+      }
+    }
+  });
+});
+
 
 // ========= POST =========
 
@@ -410,7 +432,6 @@ app.post('/accept', function (req, res) {
   req.assert('people', 'People is not valid').hasPeople();
 
   req.sanitize('hotel', 'Hotel field is either true or false').toBoolean();
-
   var errors = req.validationErrors();
 
   if(errors){
@@ -437,7 +458,7 @@ app.post('/accept', function (req, res) {
         return console.error(err);
       else {
         sendConfirmationMail(newEntity, true);
-        sendLogMail(newEntity);
+        //sendLogMail(newEntity);
       }
     });
 
@@ -489,7 +510,7 @@ app.post('/decline', function (req, res) {
         return console.error(err);
       else {
         sendConfirmationMail(newEntity, false);
-        sendLogMail(newEntity);
+        //sendLogMail(newEntity);
       }
     });
   }
