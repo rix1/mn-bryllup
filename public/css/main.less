@@ -2,12 +2,16 @@
 
 
 body {
-    overflow-x: hidden;
-    font-family: "lato",sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    background-color: @greyMd;
-    color: @darkblue;
+  overflow-x: hidden;
+  font-family: "lato",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  background-color: @greyMd;
+  color: @darkblue;
+}
+
+#helgen{
+  z-index: 150;
 }
 
 .help{
@@ -15,17 +19,19 @@ body {
 }
 
 @font-face {
-    font-family: 'Jacques'; /*a name to be used later*/
-    src: url('/fonts/JacquesGilles.otf'); /*URL to font*/
+  font-family: 'Jacques'; /*a name to be used later*/
+  src: url('/fonts/JacquesGilles.otf'); /*URL to font*/
 }
 
 @font-face {
-    font-family: 'Dilem'; /*a name to be used later*/
-    src: url('/fonts/Dilem.ttf'); /*URL to font*/
+  font-family: 'Dilem'; /*a name to be used later*/
+  src: url('/fonts/Dilem.ttf'); /*URL to font*/
 }
 
 #monogram{
-  max-width: 350px;
+  width: 40vw;
+  max-width: 300px;
+  //min-width: 200px;
 }
 
 .fade{
@@ -36,15 +42,13 @@ body {
 
 
 .blue-filter {
-  width: 100%;
-  height: 80%;
-  position: absolute;
-
-  background: url("/img/hero.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  position:absolute;
+  z-index: 0;
+  top:0px;
+  width:100%;
+  height:100vw;
+  background-color: @darkblue;
+  opacity: 0.6;
 }
 
 
@@ -57,16 +61,16 @@ body {
 }
 
 p {
-    font-family: 'Lato';
-    font-size: 15px;
+  font-family: 'Lato';
+  font-size: 15px;
 }
 
 .uppercase{
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 p.small {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 a,
@@ -74,15 +78,15 @@ a:hover,
 a:focus,
 a:active,
 a.active {
-    outline: 0;
-    color: @red;
+  outline: 0;
+  color: @red;
 }
 
 h1,
 h2{
-    text-transform: uppercase;
-    font-family: 'Dilem';
-    font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Dilem';
+  font-weight: 700;
 }
 
 h3 {
@@ -123,16 +127,16 @@ h5 {
 
 
 .leaf-white{
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    width: 100%;
-    height: 30px;
-    background:  url("/img/hr-greymd.png") no-repeat center center scroll;
-    -webkit-background-size: 10px;
-    -moz-background-size: 10px;
-    -o-background-size: 10px;
-    background-size: 300px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 30px;
+  background:  url("/img/hr-greymd.png") no-repeat center center scroll;
+  -webkit-background-size: 10px;
+  -moz-background-size: 10px;
+  -o-background-size: 10px;
+  background-size: 300px;
 }
 
 .leaf-red{
@@ -158,149 +162,179 @@ h5 {
 
 
 .btn-primary{
-    color: @red;
-    background-color: transparent;
-    border: none;
+  color: @red;
+  background-color: transparent;
+  border: none;
 }
 
 .btn-primary:hover{
-        background-color: transparent;
+  background-color: transparent;
 }
 
 .test{
-    background-color: #bf4055;
+  background-color: #bf4055;
 }
 
 .mapbox{
-    height: 500px;
-    padding: 0px;
+  height: 500px;
+  padding: 0px;
 }
 
 
 .inset-shadow{
-    -webkit-box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
-    -moz-box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
-    box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
+  -webkit-box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
+  -moz-box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
+  box-shadow: inset 0px 0px 10px 10px rgba(56,56,56,0.23);
 }
 
 .shadow{
-    -webkit-box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
-    -moz-box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
-    box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
+  -webkit-box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
+  -moz-box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
+  box-shadow: 0px 0px 10px 10px rgba(56,56,56,0.23);
 }
 
 hr.heart-light:after {
-    color: @greyMd;
-    background-color: @darkblue;
+  color: @greyMd;
+  background-color: @darkblue;
 }
 
 hr.heart-primary {
-    border-color: @red;
+  border-color: @red;
 }
 
 hr.heart-primary:after {
-    color: @red;
-    background-color: @greyMd;
+  color: @red;
+  background-color: @greyMd;
 
 }
 
 .img-centered {
-    margin: 0 auto;
+  margin: 0 auto;
 
 }
 
 header {
-    text-align: center;
-    color: @greyMd;
-    background-color: transparent;
+  text-align: center;
+  color: @greyMd;
+  //background-color: #bf4055;
+
+  background: url("/img/hero.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  margin-top: 50px;
 }
 
 header .container {
-    padding-top: 150px;
-    padding-bottom: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+
 }
 
 header img {
-    display: block;
-    margin: 0 auto 20px;
+  display: block;
+  margin: 0 auto 20px;
 }
 
 header .intro-text .name {
-    display: block;
-    text-transform: uppercase;
-    font-family: "Dilem";
-    font-size: 9vw;
+  display: block;
+  text-transform: uppercase;
+  font-family: "Dilem";
+  font-size: 9vw;
 }
 
 header .intro-text .skills {
-    font-size: 1.25em;
-    font-weight: 300;
+  font-size: 1.25em;
+  font-weight: 300;
 }
 
 // On large screen sizes
 @media(min-width:768px) {
-    header .container {
-        padding-top: 170px;
-        padding-bottom: 100px;
-    }
+  header{
+    margin-top: 100px;
+  }
 
-    header .intro-text .name {
-        font-size: 4.75em;
-    }
+  header .container {
 
-    .blue-filter{
-        height: 90%;
-    }
+    //padding-top: 170px;
+    //padding-bottom: 100px;
+  }
 
-    header .intro-text .skills {
-        font-size: 1.75em;
-    }
+  header .intro-text .name {
+    font-size: 4.75em;
+  }
 
-    .navbar-fixed-top {
-        padding: 25px 0;
-        -webkit-transition: padding .3s;
-        -moz-transition: padding .3s;
-        transition: padding .3s;
-    }
+  .blue-filter{
+    //height: 90%;
+  }
 
-    .navbar-fixed-top .navbar-brand {
-        font-size: 2em;
-        -webkit-transition: all .3s;
-        -moz-transition: all .3s;
-        transition: all .3s;
-    }
+  header .intro-text .skills {
+    font-size: 1.75em;
+  }
 
-    .navbar-fixed-top.navbar-shrink {
-        padding: 10px 0;
+  .navbar-fixed-top {
+    padding: 25px 0;
+    -webkit-transition: padding .3s;
+    -moz-transition: padding .3s;
+    transition: padding .3s;
+  }
+
+  .navbar-right{
+    font-size: 1.1em;
+    //font-size: 2.4vmax;
+
+    li.page-scroll{
+      margin: 0;
+
+      a{
+        padding: 10px;
+        line-height: 140%;
+      }
     }
+  }
+
+
+
+  .navbar-fixed-top .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+  }
+
+  .navbar-fixed-top.navbar-shrink {
+    padding: 10px 0;
+  }
 
 }
 
 .navbar-fixed-top.navbar-shrink .navbar-brand {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .navbar {
-    text-transform: uppercase;
-    font-family: "Dilem";
-    font-size: 1.5em;
-    background-color: @greyMd;
+  text-transform: uppercase;
+  font-family: "Dilem";
+  font-size: 1.5em;
+  background-color: @greyMd;
 }
 
 .navbar-brand{
-    font-size: 6vw;
+  font-size: 6vw;
 }
 
 .navbar a:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .navbar .navbar-nav {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 .navbar .navbar-nav li a:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .navbar-default,
@@ -313,17 +347,54 @@ header .intro-text .skills {
 }
 
 section {
-    padding: 100px 0;
+  padding: 30px 0;
 }
 
 section h2 {
-    margin: 0;
-    font-size: 3em;
+  margin: 0;
+  font-size: 3em;
 }
 
 section.success {
-    color: @greyMd;
-    background: @darkblue;
+  color: @greyMd;
+  background: @darkblue;
+}
+
+#welcome{
+  font-size: 1.3em;
+  font-weight: 200;
+  margin-bottom: 40px;
+}
+
+#plan{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  //border-top: solid 3px @red;
+  //border-bottom: dotted 3px @red;
+}
+
+#plan:after{
+  .line;
+  bottom  : 0;
+}
+
+
+.line{
+  content : "";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width   : 55%;  /* or 100px */
+  border-bottom:3px solid @red;
+}
+
+
+#plan:before {
+  .line;
+  top: 0;
+
 }
 
 section.success a,
@@ -331,100 +402,100 @@ section.success a:hover,
 section.success a:focus,
 section.success a:active,
 section.success a.active {
-    outline: 0;
-    color: @darkblue;
+  outline: 0;
+  color: @darkblue;
 }
 
 @media(max-width:767px) {
-    section {
-        padding: 75px 0;
-    }
+  section {
+    padding: 75px 0;
+  }
 
-    section.first {
-        padding-top: 75px;
-    }
+  section.first {
+    padding-top: 75px;
+  }
 }
 
 #portfolio .portfolio-item {
-    right: 0;
-    margin: 0 0 15px;
+  right: 0;
+  margin: 0 0 15px;
 }
 
 #portfolio .portfolio-item .portfolio-link {
-    display: block;
-    position: relative;
-    margin: 0 auto;
-    max-width: 400px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  max-width: 400px;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background: @greyMd;
-    -webkit-transition: all ease .5s;
-    -moz-transition: all ease .5s;
-    transition: all ease .5s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: @greyMd;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  transition: all ease .5s;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption .caption-content {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 20px;
-    margin-top: -12px;
-    text-align: center;
-    font-size: 20px;
-    color: @greyMd;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 20px;
+  margin-top: -12px;
+  text-align: center;
+  font-size: 20px;
+  color: @greyMd;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption .caption-content i {
-    margin-top: -12px;
+  margin-top: -12px;
 }
 
 #portfolio .portfolio-item .portfolio-link .caption .caption-content h3,
 #portfolio .portfolio-item .portfolio-link .caption .caption-content h4 {
-    margin: 0;
+  margin: 0;
 }
 
 #portfolio * {
-    z-index: 2;
+  z-index: 2;
 }
 
 @media(min-width:767px) {
-    #portfolio .portfolio-item {
-        margin: 0 0 30px;
-    }
+  #portfolio .portfolio-item {
+    margin: 0 0 30px;
+  }
 }
 
 .btn-outline {
-    margin-top: 15px;
-    border: solid 2px @red;
-    border-radius: 0;
-    font-size: 30px;
-    font-family: 'Dilem';
-    text-transform: uppercase;
-    color: @greyMd;
-    background: @red;
-    transition: all .3s ease-in-out;
+  margin-top: 15px;
+  border: solid 2px @red;
+  border-radius: 0;
+  font-size: 30px;
+  font-family: 'Dilem';
+  text-transform: uppercase;
+  color: @greyMd;
+  background: @red;
+  transition: all .3s ease-in-out;
 }
 
 .btn-red{
-    margin-top: 15px;
-    border: solid 2px @red;
-    border-radius: 0;
-    font-size: 30px;
-    font-family: 'Dilem';
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: @red;
-    background: 0 0;
-    transition: all .3s ease-in-out;
+  margin-top: 15px;
+  border: solid 2px @red;
+  border-radius: 0;
+  font-size: 30px;
+  font-family: 'Dilem';
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: @red;
+  background: 0 0;
+  transition: all .3s ease-in-out;
 
 }
 
@@ -441,31 +512,31 @@ section.success a.active {
 .btn-outline:focus,
 .btn-outline:active,
 .btn-outline.active {
-    border: solid 2px @greyMd;
-    color: @darkblue;
-    background: @greyMd;
+  border: solid 2px @greyMd;
+  color: @darkblue;
+  background: @greyMd;
 }
 
 .floating-label-form-group {
-    position: relative;
-    margin-bottom: 0;
-    padding-bottom: 0em;
-    border-bottom: 1px solid @greyMd;
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0em;
+  border-bottom: 1px solid @greyMd;
 }
 
 .floating-label-form-group input,
 .floating-label-form-group textarea {
-    z-index: 1;
-    position: relative;
-    padding-right: 0;
-    padding-left: 0;
-    border: 0;
-    border-radius: 0;
-    font-size: 1.5em;
-    background: 0 0;
-    border-bottom: solid 2px @red;
-    box-shadow: none!important;
-    resize: none;
+  z-index: 1;
+  position: relative;
+  padding-right: 0;
+  padding-left: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: 1.5em;
+  background: 0 0;
+  border-bottom: solid 2px @red;
+  box-shadow: none!important;
+  resize: none;
 }
 
 .selectButtons{
@@ -486,35 +557,35 @@ a.active {
 }
 
 .floating-label-form-group label {
-    display: block;
-    z-index: 0;
-    position: relative;
-    top: 2em;
-    margin: 0;
-    font-size: 1.5em;
-    line-height: 1.764705882em;
-    vertical-align: middle;
-    vertical-align: baseline;
-    //opacity: 0;
-    -webkit-transition: top .3s ease,opacity .3s ease;
-    -moz-transition: top .3s ease,opacity .3s ease;
-    -ms-transition: top .3s ease,opacity .3s ease;
-    transition: top .3s ease,opacity .3s ease;
+  display: block;
+  z-index: 0;
+  position: relative;
+  top: 2em;
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.764705882em;
+  vertical-align: middle;
+  vertical-align: baseline;
+  //opacity: 0;
+  -webkit-transition: top .3s ease,opacity .3s ease;
+  -moz-transition: top .3s ease,opacity .3s ease;
+  -ms-transition: top .3s ease,opacity .3s ease;
+  transition: top .3s ease,opacity .3s ease;
 }
 
 .floating-label-form-group::not(:first-child) {
-    padding-left: 14px;
-    border-left: 1px solid @greyMd;
+  padding-left: 14px;
+  border-left: 1px solid @greyMd;
 }
 
 .floating-label-form-group-with-value label {
-    top: 0;
-    opacity: 1;
-    font-size: 1.5em;
+  top: 0;
+  opacity: 1;
+  font-size: 1.5em;
 }
 
 .floating-label-form-group-with-focus label {
-    //color: @red;
+  //color: @red;
 }
 
 .errormessage{
@@ -524,7 +595,7 @@ a.active {
 
 
 form .row:first-child .floating-label-form-group {
-    border-top: 1px solid @greyMd;
+  border-top: 1px solid @greyMd;
 }
 
 .red{
@@ -547,40 +618,40 @@ form .row:first-child .floating-label-form-group {
 }
 
 footer {
-    color: @greyMd;
+  color: @greyMd;
 }
 
 footer h3 {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
   color: @greyMd;
 
 }
 
 footer .footer-above {
-    padding-top: 20px;
-    background-color: @darkblue;
+  padding-top: 20px;
+  background-color: @darkblue;
 
 }
 
 footer .footer-col {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
 }
 
 footer .footer-below {
-    padding: 15px 0;
-    background-color: @darkblue;
+  padding: 15px 0;
+  background-color: @darkblue;
 }
 
 .btn-social {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 2px solid @greyMd;
-    border-radius: 100%;
-    text-align: center;
-    font-size: 20px;
-    line-height: 45px;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid @greyMd;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 20px;
+  line-height: 45px;
 }
 
 .btn-success{
@@ -590,24 +661,24 @@ footer .footer-below {
 .btn:focus,
 .btn:active,
 .btn.active {
-    outline: 0;
+  outline: 0;
 }
 
 .scroll-top {
-    z-index: 1049;
-    position: fixed;
-    right: 2%;
-    bottom: 2%;
-    width: 50px;
-    height: 50px;
+  z-index: 1049;
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+  width: 50px;
+  height: 50px;
 }
 
 .scroll-top .btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    font-size: 20px;
-    line-height: 28px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .btn-select {
@@ -649,80 +720,80 @@ footer .footer-below {
 
 
 .scroll-top .btn:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .portfolio-modal .modal-content {
-    padding: 100px 0;
-    min-height: 100%;
-    border: 0;
-    border-radius: 0;
-    text-align: center;
-    background-clip: border-box;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  padding: 100px 0;
+  min-height: 100%;
+  border: 0;
+  border-radius: 0;
+  text-align: center;
+  background-clip: border-box;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .portfolio-modal .modal-content h2 {
-    margin: 0;
-    font-size: 3em;
+  margin: 0;
+  font-size: 3em;
 }
 
 .portfolio-modal .modal-content img {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .portfolio-modal .modal-content .item-details {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 .portfolio-modal .close-modal {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    width: 75px;
-    height: 75px;
-    background-color: transparent;
-    cursor: pointer;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 75px;
+  height: 75px;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .portfolio-modal .close-modal:hover {
-    opacity: .3;
+  opacity: .3;
 }
 
 .portfolio-modal .close-modal .lr {
-    z-index: 1051;
-    width: 1px;
-    height: 75px;
-    margin-left: 35px;
-    background-color: @greyMd;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  z-index: 1051;
+  width: 1px;
+  height: 75px;
+  margin-left: 35px;
+  background-color: @greyMd;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .portfolio-modal .close-modal .lr .rl {
-    z-index: 1052;
-    width: 1px;
-    height: 75px;
-    background-color: @greyMd;
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
+  z-index: 1052;
+  width: 1px;
+  height: 75px;
+  background-color: @greyMd;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .portfolio-modal .modal-backdrop {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }
 
 .toastmaster{
   background-color: @darkblue;
   color: @greyMd;
 
-    a{
-        color: white;
-    }
+  a{
+    color: white;
+  }
 }
 
 #contactForm{

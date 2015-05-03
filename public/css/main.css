@@ -6,6 +6,9 @@ body {
   background-color: #f2f2f2;
   color: #364252;
 }
+#helgen {
+  z-index: 150;
+}
 .help {
   color: #666766;
 }
@@ -24,7 +27,8 @@ body {
   /*URL to font*/
 }
 #monogram {
-  max-width: 350px;
+  width: 40vw;
+  max-width: 300px;
 }
 .fade {
   width: 100%;
@@ -32,14 +36,13 @@ body {
   background-color: #364252;
 }
 .blue-filter {
-  width: 100%;
-  height: 80%;
   position: absolute;
-  background: url("/img/hero.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  z-index: 0;
+  top: 0px;
+  width: 100%;
+  height: 100vw;
+  background-color: #364252;
+  opacity: 0.6;
 }
 .hero-img {
   width: 100%;
@@ -171,11 +174,16 @@ hr.heart-primary:after {
 header {
   text-align: center;
   color: #f2f2f2;
-  background-color: transparent;
+  background: url("/img/hero.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-top: 50px;
 }
 header .container {
-  padding-top: 150px;
-  padding-bottom: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
 }
 header img {
   display: block;
@@ -192,15 +200,11 @@ header .intro-text .skills {
   font-weight: 300;
 }
 @media (min-width: 768px) {
-  header .container {
-    padding-top: 170px;
-    padding-bottom: 100px;
+  header {
+    margin-top: 100px;
   }
   header .intro-text .name {
     font-size: 4.75em;
-  }
-  .blue-filter {
-    height: 90%;
   }
   header .intro-text .skills {
     font-size: 1.75em;
@@ -210,6 +214,16 @@ header .intro-text .skills {
     -webkit-transition: padding .3s;
     -moz-transition: padding .3s;
     transition: padding .3s;
+  }
+  .navbar-right {
+    font-size: 1.1em;
+  }
+  .navbar-right li.page-scroll {
+    margin: 0;
+  }
+  .navbar-right li.page-scroll a {
+    padding: 10px;
+    line-height: 140%;
   }
   .navbar-fixed-top .navbar-brand {
     font-size: 2em;
@@ -250,7 +264,7 @@ header .intro-text .skills {
   box-shadow: 0px 6px 10px 0px rgba(54, 66, 82, 0.39);
 }
 section {
-  padding: 100px 0;
+  padding: 30px 0;
 }
 section h2 {
   margin: 0;
@@ -259,6 +273,50 @@ section h2 {
 section.success {
   color: #f2f2f2;
   background: #364252;
+}
+#welcome {
+  font-size: 1.3em;
+  font-weight: 200;
+  margin-bottom: 40px;
+}
+#plan {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#plan:after {
+  content: "";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 55%;
+  /* or 100px */
+  border-bottom: 3px solid #844352;
+  bottom: 0;
+}
+.line {
+  content: "";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 55%;
+  /* or 100px */
+  border-bottom: 3px solid #844352;
+}
+#plan:before {
+  content: "";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 55%;
+  /* or 100px */
+  border-bottom: 3px solid #844352;
+  top: 0;
 }
 section.success a,
 section.success a:hover,
