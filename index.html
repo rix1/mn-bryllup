@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="/js/pongstagr.am-3.0.4/source/pongstagr.am.css">
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index" ng-app="mnApp">
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -105,7 +105,7 @@
 <!-- Bryllupshelgen Section -->
 <section id="helgen">
     <div class="container">
-        <div class="row">
+        <div class="row" ng-controller="programCtrl">
             <div class="col-sm-12 text-center">
                 <h2>Bryllupshelgen</h2>
                 <div class="leaf-red"></div>
@@ -114,49 +114,17 @@
                         <p id="welcome">
                             Selv om selve bryllupet er på lørdagen, inviterer vi til bryllupshelg! For det første ønsker vi så klart å se dere mest mulig og ha mer tid sammen med alle dere som vi er så glade i! For det andre er det mange som ikke kjenner hverandre fra før og det er veldig hyggelig at dere får bedre mulighet til å bli kjent. Da blir det mye mer moro for alle på den store dagen og! Det er så klart helt valgfritt om dere kommer hele eller deler av helgen, men gi beskjed i rsvp skjemaet nedenfor så vi kan planlegge ut fra hvor mange som kommer de ulike dagene. For at det skal bli litt lettere for dere har vi tatt inn mer informasjon om helgens program nedenfor (men noen surprises forbeholder vi oss retten til ;) )  Her kan det bli oppdateringer så det er lurt å følge med etterhvert. Og husk; det er bare å slå på tråden til oss om dere lurer på noe. Vi gleder oss masse og håper vi ser dere denne helgen!
                         </p>
-
                     </div>
                 </div>
                 <div class="col-sm-12" id="plan">
-                    <div class="col-sm-3">
-                        <h3 class="red">Fredag</h3>
-                        <div class="col-sm-12">
-                            <h4>Velkomstdrink</h4>
-                            <p><b>KLOKKEN</b> 18.00</p>
-                            <p><b>STED</b> Holckenhavn Slot</p>
-                            <p><b>ANTREKK</b> Uformelt/pent</p>
-                            <h4>Middag</h4>
-                            <p>Serveres fra grillen</p>
-                            <p><b>KLOKKEN</b> 19.00</p>
+                    <div ng-repeat="day in weddingProgram" ng-class="'col-sm-4'">
+                        <h3 class="red">{{day.day}}</h3>
+                        <div class="activity" ng-repeat="activity in day.activities">
+                            <h4>{{activity.name}}</h4>
+                            <p><small>{{activity.details.desc}}</small></p>
+                            <p class="timeAndPlace"><small> <span ng-if="activity.details.place"> <b>sted</b> {{activity.details.place}} | </span>  <b>klokken</b>  {{activity.details.time}}</small></p>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <h3 class="red">Lørdag</h3>
-                        <div class="col-sm-6">
-                            <h4>Vielse</h4>
-                            <p>KLOKKEN  <b>13.30</b> </p>
-                            <p><b>STED</b> Slotskapellet</p>
-                            <h4>Kake og Champagne</h4>
-                            <p><b>KLOKKEN</b> 15.00</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4>Bryllupsmiddag</h4>
-                            <p><b>KLOKKEN</b> 18.00</p>
-                            <p><b>STED</b> Riddersalen</p>
-                            <h4>Fest</h4>
-                            <p><b>KLOKKEN</b> 00.00</p>
-                            <p><b>STED</b> Dansesalen</p>
-                        </div>
-                        <p><b>ANTREKK</b> Smoking/mørk dress</p>
-
-                    </div>
-                    <div class="col-sm-3">
-                        <h3 class="red">Søndag</h3>
-                        <div class="col-sm-12">
-                            <h4>Felles frokost</h4>
-                            <p><b>KLOKKEN</b> 10.00</p>
-                            <p><b>STED</b> Holckenhavn Slot</p>
-                        </div>
+                        <p class="timeAndPlace grey activity" ng-if="day.dressCode"><em>antrekk: {{day.dressCode}}</em></p>
                     </div>
                 </div>
             </div>
@@ -233,14 +201,61 @@
 <section class="toastmaster" id="toastmaster">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-sm-12 text-center ">
                 <h2>Toastmaster</h2>
                 <div class="leaf-white"></div>
                 <p>Helgens toastmaster er Mathias Dyrhol Paulsen. <br/>De som har noe på hjertet bes kontakte ham på</p>
                 <p><a href="mailto:toastmaster.mathias@gmail.com">toastmaster.mathias@gmail.com</a></p>
                 <p><i>eller</i></p>
                 <p>mobil: 90015854</p>
+            </div>
+        </div>
+        <div class="row">
 
+            <div class="col-sm-12 text-center ">
+                <h2>Reisemuligheter</h2>
+                <div class="leaf-white"></div>
+                <p>Det er mange måter å komme seg til Nyborg på. Hva som blir er det rimeligste alternativet kommer litt an på hvor mange dere er som reiser sammen og hvor dere reiser fra. For å gjøre det litt enklere for dere har vi satt opp de ulike alternativene nedenfor: </p>
+                <div class="col-sm-4">
+                    <h4>1.	Fly til Kastrup Lufthavn i København</h4>
+                    <p>De rimeligste billettene fra Oslo er med Norwegian. Her er prisene nede i 299-499 når de har kampanje, så det er lurt å følge med på Norwegian sine nettsider! www.norwegian.no
+
+                        Ellers er det lurt å bruke ulike søkemotorer for å finne de rimeligste flybillettene, for eksempel www.skyscanner.no
+
+                        Fra Kastrup tar man tog til Nyborg. Toget går direkte fra flyplassen, vi brukte ca 10-15 minutter på å gå fra gate til toget. Det er enkelt, bare å gå rett frem og følg skiltene. Togbillett kan kjøpes på flyplassen før man går ned på perrongen, eller man kan kjøpe på forhånd på www.dsb.dk
+                        Togbilletten koster DKK 230.
+
+                        Flyturen fra Oslo tar 55 minutter. Togturen tar ca 1,5 time.  Fra togstasjonen i Nyborg til Holckenhavn og hotellene rundt tar det ca 5 minutter med taxi.
+                    </p>
+                </div>
+
+                <div class="col-sm-4">
+                    <h6>2. Ferge</h6>
+                    <p>
+                        Det går også an å dra til Danmark med båt, med eller uten bil.  Hvis dere tar båten uten bil må dere ta toget eller buss videre til Nyborg.
+                        <br/>
+                        <em>Fra Larvik eller Kristiansand til Hirtshals med <a href="http://www.colorline.no/batreise?filter=2.5909&filter=2.5908&gclid=CI7_ut-8pcUCFeXVcgodYZYAIQ">ColorLine Speedbåt</a></em>
+                        Båtturen tar 3-4 timer. Fra Hirtshals (nord på Jylland) til Nyborg  tar det ca.  3 timer med bil.
+                        <br/>
+                        <em>Fra Langesund eller Kristiansand til Hirtshals med <a href="http://www.fjordline.com/no?gclid=COTPmra-pcUCFSIMcwod0LcAaQ">Fjord Line</a></em>
+                        Båtturen her tar 4-5 timer.
+                        <br/>
+                        <em>Fra Oslo til København med <a href="http://www.dfdsseaways.no/">DFDS Seaways</a></em>
+                        Dette er alternativet for de som ønsker å ta dette mer som en tur, da båtturen innebærer 1 natt med overnatting om bord. Da kan man kombinere med en dag i København for litt lunsj, shopping eller tivoli, ettersom det ikke begynner på Holckenhavn Slot på fredag før 18.30.
+
+                        Avreise fra Oslo torsdag 3.september kl. 16.30.
+                        Ankomst København fredag 4.septmeber kl. 09.45
+
+                        Avreise fra København søndag 06.september kl. 16.30
+                        Ankomst Oslo mandag 07.september kl. 09.45
+
+                        Det tar 1,5 time å kjøre med bil fra København til Nyborg.
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <h6>3. Kjøre bil</h6>
+                    <p>Det er også fullt mulig å kjøre bil hele veien fra Norge, uten å kombinere med fergetur. Man må da kjøre via  Sverige og over broen fra Malmø til København. Fra Oslo til Nyborg tar bilturen ca. 7 timer.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -249,7 +264,7 @@
 
 
 <!-- Contact Section -->
-<div ng-app="mnApp">
+<div>
     <div ng-controller="rsvpCtrl">
         <section class="" id="rsvp">
             <div class="container">
@@ -261,9 +276,9 @@
                 </div>
 
                 <div class="text-center form-confirmation" ng-if="showSucccess">
-                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei til <br/><span class="red">{{form.email}}</span><br/> for å bekrefte tilbakemeldingen din.
+                    <h2 ng-if="positive">Takk skal du ha, en epost er på vei til: <br/><span class="red">{{form.email}}</span><br/> for å bekrefte tilbakemeldingen din.
                         Vi gleder oss til September!</h2>
-                    <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei til <br/><span class="red">{{form.email}}</span><br/> for å bekrefte tilbakemeldingen din.</h2>
+                    <h2 ng-if="negative">Synd du ikke kan komme! En epost er på vei til: <br/><span class="red">{{form.email}}</span><br/> for å bekrefte tilbakemeldingen din.</h2>
                     <p><em>- Martine og Nikolai</em></p>
                 </div>
 

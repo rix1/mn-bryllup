@@ -264,7 +264,7 @@ header .intro-text .skills {
   box-shadow: 0px 6px 10px 0px rgba(54, 66, 82, 0.39);
 }
 section {
-  padding: 30px 0;
+  padding: 40px 0;
 }
 section h2 {
   margin: 0;
@@ -279,6 +279,9 @@ section.success {
   font-weight: 200;
   margin-bottom: 40px;
 }
+.timeAndPlace {
+  text-transform: uppercase;
+}
 #plan {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -292,7 +295,7 @@ section.success {
   right: 0;
   width: 55%;
   /* or 100px */
-  border-bottom: 3px solid #844352;
+  border-bottom: 2px solid #844352;
   bottom: 0;
 }
 .line {
@@ -304,7 +307,7 @@ section.success {
   right: 0;
   width: 55%;
   /* or 100px */
-  border-bottom: 3px solid #844352;
+  border-bottom: 2px solid #844352;
 }
 #plan:before {
   content: "";
@@ -315,7 +318,7 @@ section.success {
   right: 0;
   width: 55%;
   /* or 100px */
-  border-bottom: 3px solid #844352;
+  border-bottom: 2px solid #844352;
   top: 0;
 }
 section.success a,
@@ -489,11 +492,17 @@ form .row:first-child .floating-label-form-group {
 .red {
   color: #844352;
 }
+.grey {
+  color: rgba(102, 103, 102, 0.65);
+}
+.activity {
+  padding-top: 10px;
+}
 .res-text-md {
   font-size: 5vw;
 }
 .form-confirmation h2 {
-  font-size: 3vmax;
+  font-size: 2.4em;
   font-family: 'Lato';
   font-weight: 200;
   text-transform: none;
