@@ -5,7 +5,7 @@ body {
   overflow-x: hidden;
   font-family: "lato",sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   background-color: @greyMd;
   color: @darkblue;
 }
@@ -360,19 +360,6 @@ section.success {
   background: @darkblue;
 }
 
-.panel-group{
-  margin: 0;
-}
-
-.panel-default>.panel-heading .panel-title{
-  background-color: @greyMd;
-  color: @darkblue;
-}
-
-.panel{
-  background-color: @darkblue;
-}
-
 #welcome{
   font-size: 1.3em;
   font-weight: 200;
@@ -383,14 +370,35 @@ section.success {
   text-transform: uppercase;
 }
 
-#plan{
+.plan{
   padding-top: 30px;
   padding-bottom: 30px;
   //border-top: solid 3px @red;
   //border-bottom: dotted 3px @red;
 }
 
-#plan:after{
+.toilet{
+  padding: 7.5px 0;
+}
+
+
+.info{
+
+  font-weight: 300;
+  letter-spacing: 0.5px;
+
+  a{
+    text-decoration: underline;
+    text-transform: none;
+  }
+}
+
+ol{
+  text-align: left;
+
+}
+
+.plan:after{
   .line;
   bottom  : 0;
 }
@@ -408,7 +416,7 @@ section.success {
 }
 
 
-#plan:before {
+.plan:before {
   .line;
   top: 0;
 
@@ -625,6 +633,7 @@ form .row:first-child .floating-label-form-group {
 
 .activity{
   padding-top: 10px;
+  font-weight: 400;
 }
 
 .res-text-md{
@@ -816,13 +825,19 @@ footer .footer-below {
   background-color: @darkblue;
   color: @greyMd;
 
+  h3{
+  }
+
+  p{
+  }
+
   a{
     color: white;
+
   }
-}
-
-#contactForm{
-
+  a:hover{
+    color: @red;
+  }
 }
 
 .textArea{

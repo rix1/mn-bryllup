@@ -116,7 +116,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-12" id="plan">
+                <div class="col-sm-12 plan">
                     <div ng-repeat="day in weddingProgram" ng-class="'col-sm-4'">
                         <h3 class="red">{{day.day}}</h3>
                         <div class="activity" ng-repeat="activity in day.activities">
@@ -201,54 +201,80 @@
 <section class="toastmaster" id="toastmaster">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 text-center ">
-                <h2>Toastmaster</h2>
+            <div class="col-sm-8 col-sm-push-2 text-center">
+                <h2>Praktisk Info</h2>
                 <div class="leaf-white"></div>
-                <p>Helgens toastmaster er Mathias Dyrhol Paulsen. <br/>De som har noe på hjertet bes kontakte ham på</p>
-                <p class="grey"><a href="mailto:toastmaster.mathias@gmail.com">toastmaster.mathias@gmail.com</a></p>
-                <p><i>eller</i></p>
-                <p>mobil: 90015854</p>
+
+                <div class="toilet">
+                    <h3>Overnatting</h3>
+                    <p>
+                        <strong>Hotel Hesselet:</strong><br/>
+                        Dette er hotellet vi generelt anbefaler til våre gjester, da dette var hotellet vi synes var hyggeligst i Nyborg. Hotellet ligger helt nede ved sjøen, har romslige rom og stort svømmebasseng og spa avdeling, så det er gode muligheter for en avslappende lørdag formiddag.  Her har vi forhåndsbooket alle ledige rom for helgen. Våre gjester betaler DKK 1120 per natt for dobbeltrom. Hvis dere ønsker å benytte dere av dette booker dere rom gjennom oss på rsvp skjemaet nedenfor innen 5.juni 2015.
+                        <br/><br/>
+                        For de av dere som ikke ønsker å benytte dere av dette er det flere alternativer i Nyborg, vi anbefaler at dere søker det opp på nettet. Merk at Nyborg er en populær ferieby i Danmark og at det allerede begynner å bli fullt flere steder, så ikke vent for lenge med å bestille.
+                        <br/><br/>
+                        Vi håper dette er til hjelp, ikke nøl med å ringe oss dersom dere lurer på noe!
+
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="row">
 
-            <div class="col-sm-6 col-sm-push-3 text-center ">
-                <h2>Reisemuligheter</h2>
-                <div class="leaf-white"></div>
-                <p>Det er mange måter å komme seg til Nyborg på. Hva som blir er det rimeligste alternativet kommer litt an på hvor mange dere er som reiser sammen og hvor dere reiser fra. For å gjøre det litt enklere for dere har vi satt opp de ulike alternativene nedenfor: </p>
+            <div ng-controller="usefulInfoCtrl" class="col-xs-8 col-xs-push-2 text-center">
 
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    <h3>
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Fly
-                        </a>
-                    </h3>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
+                <div class="toilet">
+                    <h3>Reisemuligheter</h3>
+                    <p>Det er mange måter å komme seg til Nyborg på. Hva som blir er det rimeligste alternativet kommer litt an på hvor mange dere er som reiser sammen og hvor dere reiser fra. For å gjøre det litt enklere for dere har vi satt opp de ulike alternativene nedenfor:</p>
+                    <tabset class="toilet" justified="true">
+                        <tab heading="Fly til Kastrup">
+                            <br/>
+                            <p class="info animated fadeIn">De rimeligste billettene fra Oslo er med Norwegian. Her er prisene nede i 299-499 når de har kampanje, så det er lurt å følge med på
+                                Norwegian sine <a href="http://www.norwegian.no">nettsider!</a> Ellers er det lurt å bruke ulike søkemotorer for å finne de rimeligste flybillettene, for eksempel
+                                <a href="http://www.skyscanner.no">Skyscanner</a>.
+                                <br/><br/>
+                                Fra Kastrup tar man tog til Nyborg. Toget går direkte fra flyplassen, vi brukte ca 10-15 minutter på å gå fra Gate til toget. Det er enkelt, bare å gå rett frem og følg skiltene. Togbillett kan kjøpes på flyplassen før man går ned på perrongen, eller man kan kjøpe på forhånd på DSB sine
+                                <a href="http://www.dsb.dk">nettsider</a>. Togbilletten koster DKK 230. Flyturen fra Oslo tar 55 minutter. Togturen tar ca 1,5 time.  Fra togstasjonen i Nyborg til Holckenhavn og hotellene rundt tar det ca 5 minutter med taxi.
+                            </p>
+                        </tab>
+                        <tab heading="Ferge">
+                            <br/>
+                            <p>Det går også an å dra til Danmark med båt, med eller uten bil. Hvis dere tar båten uten bil må dere ta toget eller buss videre til Nyborg.</p>
+                            <ol class="info">
+                                <li>Fra Larvik eller Kristiansand til Hirtshals med <a href="http://www.colorline.no/batreise?filter=2.5909&filter=2.5908&gclid=CI7_ut-8pcUCFeXVcgodYZYAIQ">ColorLine Speedbåt</a>
+                                    Båtturen tar 3-4 timer. Fra Hirtshals (nord på Jylland) til Nyborg  tar det ca.  3 timer med bil.</li>
+                                <li>Fra Langesund eller Kristiansand til Hirtshals med <a href="http://www.fjordline.com/no?gclid=COTPmra-pcUCFSIMcwod0LcAaQ">Fjord Line</a>
+                                    Båtturen her tar 4-5 timer.</li>
+                                <li>Fra Oslo til København med <a href="http://www.dfdsseaways.no/">DFDS Seaways</a>
+                                    Dette er alternativet for de som ønsker å ta dette mer som en tur, da båtturen innebærer 1 natt med overnatting om bord. Da kan man kombinere med en dag i København for litt lunsj, shopping eller tivoli, ettersom det ikke begynner på Holckenhavn Slot på fredag før 18.30.
+                                    <p>
+                                        - Avreise fra Oslo torsdag 3.september kl. 16.30. <br/>
+                                        - Ankomst København fredag 4.septmeber kl. 09.45 <br/>
+                                        - Avreise fra København søndag 06.september kl. 16.30 <br/>
+                                        - Ankomst Oslo mandag 07.september kl. 09.45 <br/>
+                                    </p>
+                                    </ul>
+                                </li>
+                                <p>
+                                    Det tar 1,5 time å kjøre med bil fra København til Nyborg.
+                                </p>
+                            </ol>
+                        </tab>
+
+                        <tab heading="Bil">
+                            <br/>
+                            <p class="info animated fadeIn">
+                                Det er også fullt mulig å kjøre bil hele veien fra Norge, uten å kombinere med fergetur. Man må da kjøre via  Sverige og over broen fra Malmø til København. Fra Oslo til Nyborg tar bilturen ca. 7 timer.
+                            </p>
+                        </tab>
+                    </tabset>
                 </div>
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
-                    </a>
-                </h4>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
+                <div class="toilet">
+                    <h3>Toastmaster</h3>
+                    <p>Helgens toastmaster er Mathias Dyrhol Paulsen. <br/>De som har noe på hjertet bes kontakte ham på</p>
+                    <p class="grey"><a href="mailto:toastmaster.mathias@gmail.com">toastmaster.mathias@gmail.com</a></p>
+                    <p><i>eller</i></p>
+                    <p>mobil: 90015854</p>
                 </div>
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
-                    </a>
-                </h4>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -422,9 +448,14 @@
 <!-- Custom Theme JavaScript -->
 <script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script type="text/javascript" src="/bower_components/underscore/underscore-min.js"></script>
 <script type="text/javascript" src="/js/ng-tags-input.js"></script>
 <script type="text/javascript" src="/js/mnApp.js"></script>
+<script type="text/javascript" src="/js/controllers/programCtrl.js"></script>
+<script type="text/javascript" src="/js/controllers/rsvpCtrl.js"></script>
+<script type="text/javascript" src="/js/controllers/usefulInfoCtrl.js"></script>
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 
