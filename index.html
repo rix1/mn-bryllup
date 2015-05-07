@@ -206,32 +206,20 @@
                 <div class="leaf-white"></div>
 
                 <div class="toilet">
-                    <h3>Overnatting</h3>
-                    <p>
-                        <strong>Hotel Hesselet:</strong><br/>
-                        Dette er hotellet vi generelt anbefaler til våre gjester, da dette var hotellet vi synes var hyggeligst i Nyborg. Hotellet ligger helt nede ved sjøen, har romslige rom og stort svømmebasseng og spa avdeling, så det er gode muligheter for en avslappende lørdag formiddag.  Her har vi forhåndsbooket alle ledige rom for helgen. Våre gjester betaler DKK 1120 per natt for dobbeltrom. Hvis dere ønsker å benytte dere av dette booker dere rom gjennom oss på rsvp skjemaet nedenfor innen 5.juni 2015.
-                        <br/><br/>
-                        For de av dere som ikke ønsker å benytte dere av dette er det flere alternativer i Nyborg, vi anbefaler at dere søker det opp på nettet. Merk at Nyborg er en populær ferieby i Danmark og at det allerede begynner å bli fullt flere steder, så ikke vent for lenge med å bestille.
-                        <br/><br/>
-                        Vi håper dette er til hjelp, ikke nøl med å ringe oss dersom dere lurer på noe!
-
-                    </p>
-                </div>
-            </div>
-
-            <div ng-controller="usefulInfoCtrl" class="col-xs-8 col-xs-push-2 text-center">
-
-                <div class="toilet">
                     <h3>Toastmaster</h3>
                     <p>Helgens toastmaster er Mathias Dyrhol Paulsen. <br/>De som har noe på hjertet bes kontakte ham på</p>
                     <p class="grey"><a href="mailto:toastmaster.mathias@gmail.com">toastmaster.mathias@gmail.com</a></p>
                     <p><i>eller</i></p>
                     <p>mobil: 90015854</p>
                 </div>
+            </div>
+
+            <div ng-controller="usefulInfoCtrl" class="col-xs-8 col-xs-push-2 text-center">
+
 
                 <div class="toilet">
                     <h3>Reisemuligheter</h3>
-                    <p>Det er mange måter å komme seg til Nyborg på. Hva som blir er det rimeligste alternativet kommer litt an på hvor mange dere er som reiser sammen og hvor dere reiser fra. For å gjøre det litt enklere for dere har vi satt opp de ulike alternativene nedenfor:</p>
+                    <p>Det er mange måter å komme seg til Nyborg på. Hva som blir det rimeligste alternativet kommer litt an på hvor mange dere er som reiser sammen og hvor dere reiser fra. For å gjøre det litt enklere for dere har vi satt opp de ulike alternativene nedenfor:</p>
                     <tabset class="toilet" justified="true">
                         <tab heading="Fly til Kastrup">
                             <br/>
@@ -246,7 +234,7 @@
                         <tab heading="Ferge">
                             <br/>
                             <p>Det går også an å dra til Danmark med båt, med eller uten bil. Hvis dere tar båten uten bil må dere ta toget eller buss videre til Nyborg.</p>
-                            <ol class="info">
+                            <ol class="info animated fadeIn" >
                                 <li>Fra Larvik eller Kristiansand til Hirtshals med <a href="http://www.colorline.no/batreise?filter=2.5909&filter=2.5908&gclid=CI7_ut-8pcUCFeXVcgodYZYAIQ">ColorLine Speedbåt</a>
                                     Båtturen tar 3-4 timer. Fra Hirtshals (nord på Jylland) til Nyborg  tar det ca.  3 timer med bil.</li>
                                 <li>Fra Langesund eller Kristiansand til Hirtshals med <a href="http://www.fjordline.com/no?gclid=COTPmra-pcUCFSIMcwod0LcAaQ">Fjord Line</a>
@@ -274,6 +262,20 @@
                             </p>
                         </tab>
                     </tabset>
+                </div>
+
+                <div class="toilet">
+
+                    <h3>Overnatting</h3>
+                    <p>
+                        <strong>Hotel Hesselet:</strong><br/>
+                        Dette er hotellet vi generelt anbefaler til våre gjester, da dette var hotellet vi synes var hyggeligst i Nyborg. Hotellet ligger helt nede ved sjøen, har romslige rom og stort svømmebasseng og spa avdeling, så det er gode muligheter for en avslappende lørdag formiddag.  Her har vi forhåndsbooket alle ledige rom for helgen. Våre gjester betaler DKK 1120 per natt for dobbeltrom. Hvis dere ønsker å benytte dere av dette booker dere rom gjennom oss på rsvp skjemaet nedenfor innen 5.juni 2015.
+                        <br/><br/>
+                        For de av dere som ikke ønsker å benytte dere av dette er det flere alternativer i Nyborg, vi anbefaler at dere søker det opp på nettet. Merk at Nyborg er en populær ferieby i Danmark og at det allerede begynner å bli fullt flere steder, så ikke vent for lenge med å bestille.
+                        <br/><br/>
+                        Vi håper dette er til hjelp, ikke nøl med å ringe oss dersom dere lurer på noe!
+
+                    </p>
                 </div>
             </div>
         </div>
@@ -306,7 +308,6 @@
                         <form name="tokenForm" class="form-inline" ng-if="showValidation">
                             <div class="form-group inline">
                                 <p>Fyll inn koden fra invitasjonen for å svare.</p>
-                                <!--<h1>Svarskjemaet ER IKKE HELT KLART. Kom tilbake i morgen!</h1>-->
                                 <label for="tokenField"></label>
                                 <input autocomplete="off" name="token" type="text" class="form-control" id="tokenField" placeholder="Invitasjonskode..." ng-model="token">
                                 <button type="submit" class="btn btn-selected" ng-click="testSecret(token)" >Godkjenn</button>
@@ -314,9 +315,6 @@
                             <p class="errormessage animated fadeInDown">{{validationError}}</p>
                         </form>
                     </div>
-
-                    <!--<h1>{{data.message}} er ikke helt klart enna,<br/> kom tilbake om et par dager.</h1>-->
-
                     <div class="col-lg-8 col-lg-offset-2 animated fadeIn" ng-if="showForm">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
